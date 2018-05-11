@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DostarApp</string>
+    <string name="home">Главная</string>
+    <string name="support">Помощь</string>
+    <string name="settings">Настройки</string>
+    <string name="forum">Форум</string>
+    <string name="sign_out">Выйти</string>
+    <string name="courses">Курсы</string>
+    <string name="vacancies">Вакансии</string>
+    <string name="profile">Профиль</string>
+    <string name="calendar">Календарь событий</string>
+</resources>

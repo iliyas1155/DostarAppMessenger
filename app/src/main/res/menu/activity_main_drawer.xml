@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_forum"
+            android:title="@string/forum" />
+        <item
+            android:id="@+id/nav_courses"
+            android:title="@string/courses" />
+        <item
+            android:id="@+id/nav_vacancies"
+            android:title="@string/vacancies" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:title="@string/calendar" />
+    </group>
+
+    <group
+        android:id="@+id/menu_middle"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_settings"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/nav_support"
+            android:title="@string/support" />
+        <item
+            android:id="@+id/nav_sign_out"
+            android:title="@string/sign_out" />
+    </group>
+
+</menu>

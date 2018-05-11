@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sign_up">Регистрация</string>
+    <string name="sign_in">Войти</string>
+    <string name="create_course">Создать курс</string>
+    <string name="create_vacancy">Создать вакансию</string>
+    <string name="languages_prompt">Выберите язык</string>
+    <string-array name="languages">
+        <item>Русский</item>
+        <item>Английский</item>
+    </string-array>
+    <string name="send">отправить</string>
+    <string name="activate_changes">Поменять язык</string>
+    <string name="loading">загрузка</string>
+</resources>
