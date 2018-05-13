@@ -67,8 +67,8 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="-5dp"
                     android:entries="@array/gender"
-                    android:prompt="@string/gender"
-                    android:spinnerMode="dropdown" />
+                    android:prompt="@string/gender_prompt"
+                    android:spinnerMode="dialog" />
 
                 <EditText
                     android:id="@+id/phone_field"

@@ -60,22 +60,22 @@
                     android:text="@string/vacancies" />
 
                 <Button
-                    android:layout_weight="1"
-                    android:id="@+id/to_chat_button"
+                    android:id="@+id/to_calendar_button"
                     style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/support" />
+                    android:layout_weight="1"
+                    android:text="@string/calendar" />
 
                 <Button
-                    android:layout_weight="1"
-                    android:id="@+id/sign_out_button"
+                    android:id="@+id/to_profile_button"
                     style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/sign_out" />
+                    android:layout_weight="1"
+                    android:text="@string/profile" />
             </LinearLayout>
         </RelativeLayout>
 

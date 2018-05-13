@@ -106,6 +106,15 @@ public class CalendarActivity extends SampleActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MainActivity.isAdmin == false){
+            create.setVisibility(View.GONE);
+            eventText.setVisibility(View.GONE);
+        }
+    }
+
     private void setEvents(){
         calendar.removeAllEvents();
         calendar.addEvents(events);

@@ -53,4 +53,5 @@
     <string name="courses_search">Search by courses&#8230;</string>
     <string name="vacancies_search">Search by vacancies&#8230;</string>
     <string name="forum_search">Search by forum&#8230;</string>
+    <string name="gender_prompt">Choose your gender</string>
 </resources>

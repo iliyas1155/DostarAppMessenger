@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void setDefaultTopic(){
-        chosenTopic = new ForumTopic("main", "default topic");
+        chosenTopic = new ForumTopic("support_chat", "default topic");
     }
 
     private void setOnClick(){
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage("@string/loading");
+            mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);
         }
 

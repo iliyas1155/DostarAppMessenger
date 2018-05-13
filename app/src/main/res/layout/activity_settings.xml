@@ -39,11 +39,14 @@
                     android:id="@+id/languages_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="-5dp"
                     android:entries="@array/languages"
                     android:prompt="@string/languages_prompt"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dialog" />
                 <Button
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/activate_changes_button"
                     style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
@@ -51,6 +54,7 @@
                     android:text="@string/activate_changes" />
                 <Button
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/to_profile_button"
                     style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
@@ -59,6 +63,7 @@
 
                 <Button
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/sign_out_button"
                     style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"

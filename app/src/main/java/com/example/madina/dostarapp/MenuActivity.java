@@ -6,17 +6,17 @@ import android.view.View;
 import android.widget.Button;
 
 public class MenuActivity extends SampleActivity {
-    private Button toChat, toForum, toVacancies, toCourses, signOut;
+    private Button toCalendar, toForum, toVacancies, toCourses, toProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        toChat = findViewById(R.id.to_chat_button);
+        toCalendar = findViewById(R.id.to_calendar_button);
         toForum = findViewById(R.id.to_forum_button);
         toVacancies = findViewById(R.id.to_vacancies_button);
         toCourses = findViewById(R.id.to_courses_button);
-        signOut = findViewById(R.id.sign_out_button);
+        toProfile = findViewById(R.id.to_profile_button);
 
         setOnClickListeners();
         if(MainActivity.ADMIN_EMAILS_LIST.contains(MainActivity.currentUser.getEmail())){
@@ -32,11 +32,10 @@ public class MenuActivity extends SampleActivity {
     }
 
     private void setOnClickListeners() {
-        toChat.setOnClickListener(new View.OnClickListener() {
+        toCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MenuActivity.this, ChatActivity.class);
-                myIntent.putExtra("title", getString(R.string.support));
+                Intent myIntent = new Intent(MenuActivity.this, CalendarActivity.class);
                 MenuActivity.this.startActivity(myIntent);
             }
         });
@@ -61,11 +60,11 @@ public class MenuActivity extends SampleActivity {
                 MenuActivity.this.startActivity(myIntent);
             }
         });
-        signOut.setOnClickListener(new View.OnClickListener() {
+        toProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.signOut();
-                finish();
+                Intent myIntent = new Intent(MenuActivity.this, ProfileActiviry.class);
+                MenuActivity.this.startActivity(myIntent);
             }
         });
 
