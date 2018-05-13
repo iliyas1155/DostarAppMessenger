@@ -11,11 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.madina.dostarapp.Utils.UserProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import static com.example.madina.dostarapp.MainActivity.currentUser;
 import static com.example.madina.dostarapp.MainActivity.mAuth;
@@ -23,6 +28,7 @@ import static com.example.madina.dostarapp.MainActivity.mAuth;
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
     public ProgressDialog mProgressDialog;
+    private FirebaseFirestore db;
     Button signUp;
     EditText emailEditText, passwordEditText, nameEditText;
 
@@ -30,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        db = FirebaseFirestore.getInstance();
 
         emailEditText = findViewById(R.id.email_field);
         passwordEditText = findViewById(R.id.password_field);
@@ -52,19 +59,15 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
         showProgressDialog();
-        // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             currentUser = mAuth.getCurrentUser();
                             Toast.makeText(SignUpActivity.this, "Authentication success.",
                                     Toast.LENGTH_SHORT).show();
-
-
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(name)
@@ -80,22 +83,37 @@ public class SignUpActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
+                            createUserProfile(currentUser.getUid(), currentUser.getEmail(), currentUser.getDisplayName());
                             sendEmailVerification();
                             updateUI(currentUser);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
 
-                        // [START_EXCLUDE]
                         hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
-        // [END create_user_with_email]
+    }
+    private void createUserProfile(String userId, String email, String name){
+        UserProfile userProfile = new UserProfile(userId, email);
+        userProfile.name = name;
+        db.collection(MainActivity.COLLECTION_USERS)
+                .add(userProfile)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "User created! DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "User creation failed! Error adding document", e);
+                    }
+                });
     }
     public void showProgressDialog() {
         if (mProgressDialog == null) {

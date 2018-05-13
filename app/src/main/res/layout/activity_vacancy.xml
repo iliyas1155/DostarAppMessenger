@@ -28,7 +28,7 @@
             android:background="@drawable/background_image">
 
             <TextView
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:id="@+id/vacancy_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -43,15 +43,8 @@
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background" />
 
-            <TextView
-                android:layout_weight="4"
-                android:id="@+id/vacancy_contacts"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textAlignment="center"
-                android:textColor="@color/cardview_light_background" />
             <Button
-                android:layout_weight="2"
+                android:layout_weight="4"
                 style="@android:style/Widget.Holo.Light.Button"
                 android:text="@string/respond"
                 android:id="@+id/respond_button"
