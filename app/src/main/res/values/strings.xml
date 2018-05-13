@@ -18,8 +18,8 @@
         <item>English</item>
     </string-array>
     <string-array name="gender">
-        <item>Male</item>
         <item>Female</item>
+        <item>Male</item>
     </string-array>
     <string name="send">send</string>
     <string name="activate_changes">Change language</string>
@@ -50,4 +50,6 @@
     <string name="gender">gender</string>
     <string name="profile_update_failure">profile update failed, try later</string>
     <string name="profile_update_success">profile updated</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
 </resources>

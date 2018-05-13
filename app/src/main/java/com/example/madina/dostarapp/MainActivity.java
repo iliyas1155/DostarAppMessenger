@@ -32,7 +32,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String COLLECTION_USERS = "users";
-    private final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity";
     public static FirebaseAuth mAuth;
     public static UserProfile userProfile;
     public static FirebaseUser currentUser;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isAdmin;
     public static ForumTopic chosenTopic;
     public ProgressDialog mProgressDialog;
-    private FirebaseFirestore db;
+    private static FirebaseFirestore db;
     Button signIn, signUp;
 
     @Override
@@ -101,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             Intent myIntent = new Intent(MainActivity.this, MenuActivity.class);
             MainActivity.this.startActivity(myIntent);
-            userProfile = new UserProfile(user.getUid(), user.getEmail());
             getUserProfile(user.getUid());
         } else {
-            userProfile = null;
         }
     }
 
-    private void getUserProfile(final String userId){
+    public static void getUserProfile(final String userId){
+        userProfile = new UserProfile(currentUser.getUid(), currentUser.getEmail());
+        userProfile.name = currentUser.getDisplayName();
         DocumentReference docRef = db.collection(COLLECTION_USERS).document(userId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData().get("id"));
-                        userProfile.name = (String) document.getData().get("name");
                         userProfile.phoneNumber = (String) document.getData().get("phoneNumber");
                         userProfile.gender = (String) document.getData().get("gender");
                         userProfile.education = (String) document.getData().get("education");

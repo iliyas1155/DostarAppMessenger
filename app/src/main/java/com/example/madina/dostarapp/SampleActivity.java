@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.madina.dostarapp.Utils.SharedPreferencesUtil;
 
 import java.util.Locale;
+import static com.example.madina.dostarapp.MainActivity.userProfile;
 
 public class SampleActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
@@ -42,6 +43,20 @@ public class SampleActivity extends AppCompatActivity {
         NavigationView navView = findViewById(R.id.nav_view);
         NavViewListener navViewListener = new NavViewListener(this, drawer);
         navView.setNavigationItemSelectedListener(navViewListener);
+    }
+
+    public String getResume(){
+        String resume = "";
+        if(userProfile.name != null) resume += getString(R.string.full_name).toUpperCase() + ":\n" + userProfile.name + "\n\n";
+        if(userProfile.gender != null) resume += getString(R.string.gender).toUpperCase() + ":\n" + userProfile.gender+ "\n\n";
+        if(userProfile.email != null) resume += getString(R.string.email).toUpperCase() + ":\n" + userProfile.email+ "\n\n";
+        if(userProfile.phoneNumber != null) resume += getString(R.string.phone_number).toUpperCase() + ":\n" + userProfile.phoneNumber+ "\n\n";
+        if(userProfile.address != null) resume += getString(R.string.address).toUpperCase() + ":\n" + userProfile.address+ "\n\n";
+        if(userProfile.workExperience != null) resume += getString(R.string.work_experience).toUpperCase() + ":\n" + userProfile.workExperience+ "\n\n";
+        if(userProfile.aboutYourself != null) resume += getString(R.string.about).toUpperCase() + ":\n" + userProfile.aboutYourself+ "\n\n";
+        if(userProfile.skills != null) resume += getString(R.string.skills).toUpperCase() + ":\n" + userProfile.skills+ "\n\n";
+        if(userProfile.education != null) resume += getString(R.string.education).toUpperCase() + ":\n" + userProfile.education+ "\n\n";
+        return resume;
     }
 
     public void setSupportActionBarIcon(){
