@@ -37,11 +37,9 @@
     <string name="respond_success">You are now responded on current vacancy</string>
     <string name="respond_failure">Responding error, try later</string>
     <string name="respond_already_done">You are already responding current vacancy</string>
-    <string name="vacancies_search">Search by vacancies&#8230;</string>
     <string name="password">password</string>
     <string name="course_title">course title</string>
     <string name="course_description">course description</string>
-    <string name="courses_search">Search by courses&#8230;</string>
     <string name="youtube_link">YouTube URL</string>
     <string name="work_experience">work experience</string>
     <string name="address">address</string>
@@ -52,4 +50,7 @@
     <string name="profile_update_success">profile updated</string>
     <string name="male">male</string>
     <string name="female">female</string>
+    <string name="courses_search">Search by courses&#8230;</string>
+    <string name="vacancies_search">Search by vacancies&#8230;</string>
+    <string name="forum_search">Search by forum&#8230;</string>
 </resources>

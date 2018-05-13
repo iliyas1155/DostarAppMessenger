@@ -28,11 +28,9 @@
     <string name="respond_success">Вы успешно отозвались на вакансию</string>
     <string name="respond_failure">Ошибка, попробуйте позже</string>
     <string name="respond_already_done">Вы уже откликнулись на данную вакансию</string>
-    <string name="vacancies_search">Поиск по вакансиям&#8230;</string>
     <string name="password">пароль</string>
     <string name="course_title">название курса</string>
     <string name="course_description">описание курса</string>
-    <string name="courses_search">Поиск по курсам&#8230;</string>
     <string name="youtube_link">YouTube ссылка</string>
     <string name="work_experience">опыт работы</string>
     <string name="address">адрес</string>
@@ -43,4 +41,7 @@
     <string name="profile_update_success">профиль обновлён</string>
     <string name="male">мужской</string>
     <string name="female">женский</string>
+    <string name="courses_search">Поиск по курсам&#8230;</string>
+    <string name="vacancies_search">Поиск по вакансиям&#8230;</string>
+    <string name="forum_search">Поиск по форуму&#8230;</string>
 </resources>

@@ -5,21 +5,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.madina.dostarapp.Items.ForumTopic;
 import com.example.madina.dostarapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by The Great on 4/22/2018.
  */
 
-public class ForumAdapter  extends RecyclerView.Adapter<CousesAdapter.CourseViewHolder>{
+public class ForumAdapter  extends RecyclerView.Adapter<CousesAdapter.CourseViewHolder>
+        implements Filterable {
     private List<ForumTopic> topics;
+    private List<ForumTopic> filteredTopics;
+
     public ForumAdapter(List<ForumTopic> topics){
         this.topics = topics;
+        this.filteredTopics = topics;
     }
 
     @Override
@@ -31,13 +38,13 @@ public class ForumAdapter  extends RecyclerView.Adapter<CousesAdapter.CourseView
 
     @Override
     public void onBindViewHolder(CousesAdapter.CourseViewHolder courseViewHolder, int i) {
-        courseViewHolder.course_name.setText(topics.get(i).name);
-        courseViewHolder.course_desc.setText(topics.get(i).desc);
+        courseViewHolder.course_name.setText(filteredTopics.get(i).name);
+        courseViewHolder.course_desc.setText(filteredTopics.get(i).desc);
     }
 
     @Override
     public int getItemCount() {
-        return topics.size();
+        return filteredTopics.size();
     }
 
     @Override
@@ -56,5 +63,37 @@ public class ForumAdapter  extends RecyclerView.Adapter<CousesAdapter.CourseView
             topic_name = itemView.findViewById(R.id.item_name);
             topic_desc = itemView.findViewById(R.id.item_desc);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String query = charSequence.toString();
+                List<ForumTopic> filtered = new ArrayList<>();
+
+                if (query.isEmpty()) {
+                    filtered = topics;
+                } else {
+                    for (ForumTopic topic : topics) {
+                        if (topic.name.contains(query)) {
+                            filtered.add(topic);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.count = filtered.size();
+                results.values = filtered;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence query, FilterResults filterResults) {
+                filteredTopics = (ArrayList<ForumTopic>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

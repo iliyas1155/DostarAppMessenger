@@ -140,7 +140,7 @@ public class VacanciesActivity extends SampleActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
         SearchView mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setQueryHint(getString(R.string.courses_search));
+        mSearchView.setQueryHint(getString(R.string.vacancies_search));
         mSearchView.setOnQueryTextListener(new QueryListener());
 
         return super.onCreateOptionsMenu(menu);
