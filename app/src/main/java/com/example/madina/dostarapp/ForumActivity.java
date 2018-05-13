@@ -64,6 +64,7 @@ public class ForumActivity extends SampleActivity {
                         setChosenTopic();
                         Log.d(TAG, "\titem clicked:\tposition = " + position);
                         Intent myIntent = new Intent(ForumActivity.this, ChatActivity.class);
+                        myIntent.putExtra("title", topics.get(selectedTopic).name);
                         ForumActivity.this.startActivity(myIntent);
                     }
 

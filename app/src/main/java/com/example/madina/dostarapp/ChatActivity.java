@@ -1,18 +1,11 @@
 package com.example.madina.dostarapp;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,7 +65,14 @@ public class ChatActivity extends SampleActivity {
         setOnClickListener();
     }
 
-//    private void initializeData(){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String title = getIntent().getStringExtra("title");
+        getSupportActionBar().setTitle(title != null ? title : getString(R.string.app_name));
+    }
+
+    //    private void initializeData(){
 //        messagesList = new ArrayList<>();
 //        messagesList.add(new ChatMessage("Hi", "Iliyas"));
 //        messagesList.add(new ChatMessage("Love you", "Symbat"));

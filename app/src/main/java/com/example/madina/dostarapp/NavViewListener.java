@@ -39,6 +39,7 @@ public class NavViewListener implements NavigationView.OnNavigationItemSelectedL
         }
         if (id == R.id.nav_support) {
             Intent myIntent = new Intent(context, ChatActivity.class);
+            myIntent.putExtra("title", context.getString(R.string.support));
             context.startActivity(myIntent);
         }
         if (id == R.id.nav_settings) {

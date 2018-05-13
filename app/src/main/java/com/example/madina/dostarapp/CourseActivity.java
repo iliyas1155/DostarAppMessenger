@@ -14,6 +14,8 @@ import static com.example.madina.dostarapp.CoursesActivity.getSelectedCourse;
 
 public class CourseActivity extends SampleActivity implements YouTubePlayer.OnInitializedListener {
 
+    Course course;
+
     TextView titleTextView, descTextView, textTextView;
     YouTubePlayerFragment youtubeFragment;
 
@@ -26,13 +28,19 @@ public class CourseActivity extends SampleActivity implements YouTubePlayer.OnIn
         descTextView = findViewById(R.id.course_description);
         textTextView = findViewById(R.id.course_text);
 
-        Course course = getSelectedCourse();
+        course = getSelectedCourse();
 
         titleTextView.setText(course.name);
         descTextView.setText(course.desc);
         textTextView.setText(course.text);
 
         initYoutubeFragment();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSupportActionBar().setTitle(course.name);
     }
 
     private void initYoutubeFragment() {

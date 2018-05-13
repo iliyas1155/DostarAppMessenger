@@ -35,6 +35,7 @@ public class MenuActivity extends SampleActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MenuActivity.this, ChatActivity.class);
+                myIntent.putExtra("title", getString(R.string.support));
                 MenuActivity.this.startActivity(myIntent);
             }
         });
