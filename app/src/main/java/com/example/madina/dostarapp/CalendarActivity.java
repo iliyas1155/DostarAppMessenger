@@ -4,6 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.madina.dostarapp.Items.ChatMessage;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -31,12 +37,34 @@ public class CalendarActivity extends SampleActivity {
     private CompactCalendarView calendar;
     private FirebaseFirestore db;
     private List<Event> events;
+    EditText eventText;
+    TextView selectedDateEventsOutput;
+    Button create;
+    Date selectedDate = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         db = FirebaseFirestore.getInstance();
         events = new ArrayList();
+        create = findViewById(R.id.add_event);
+        eventText = findViewById(R.id.event_edit_text);
+        selectedDateEventsOutput = findViewById(R.id.selected_date_events_output);
+
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String data = eventText.getText().toString();
+                if (selectedDate != null){
+                    Event newEvent = new Event(Color.BLACK, selectedDate.getTime(), data);
+                    addEvent(newEvent);
+                }else{
+                    Toast.makeText(CalendarActivity.this, "No date selected",
+                            Toast.LENGTH_SHORT).show();
+                }
+                eventText.setText("");
+            }
+        });
     }
 
     @Override
@@ -46,6 +74,7 @@ public class CalendarActivity extends SampleActivity {
         calendar = findViewById(R.id.calendar);
         calendar.setLocale(TimeZone.getDefault(), new Locale(getLanguage()));
         calendar.setUseThreeLetterAbbreviation(true);
+        calendar.showCalendarWithAnimation();
 
         Date currentFirstDate = calendar.getFirstDayOfCurrentMonth();
         String month = (currentFirstDate.toString()).substring(4,7);
@@ -56,8 +85,13 @@ public class CalendarActivity extends SampleActivity {
         calendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
+                selectedDate = dateClicked;
                 List<Event> events = calendar.getEvents(dateClicked);
-                Log.d(TAG, "Day was clicked: " + dateClicked + " with events " + events);
+                String showText = "";
+                for (int i = 0; i < events.size(); i++) {
+                    showText += (i + 1) + ") " + events.get(i).getData() + "\n";
+                }
+                selectedDateEventsOutput.setText(showText);
             }
 
             @Override
@@ -73,29 +107,35 @@ public class CalendarActivity extends SampleActivity {
 
 
     private void setEvents(){
+        calendar.removeAllEvents();
         calendar.addEvents(events);
     }
 
     private void addEvent(Event event){
-        // Add a new document with a generated ID
+        showProgressDialog();
         db.collection("events")
                 .add(event)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        hideProgressDialog();
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(CalendarActivity.this, "Event added",
+                                Toast.LENGTH_SHORT).show();
+                        getEvents();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(CalendarActivity.this, "Failed to add event",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void getEvents(){
-        showProgressDialog();
         db.collection("events")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -110,7 +150,6 @@ public class CalendarActivity extends SampleActivity {
                                 events.add(new Event(color, timeInMillis, data));
                             }
                             setEvents();
-                            hideProgressDialog();
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }

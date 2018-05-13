@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:hint="name"
                 android:textAlignment="center"
-                android:textColorHint="@color/colorAccent"
+
                 android:textColor="@color/cardview_light_background"/>
 
             <EditText
@@ -45,7 +45,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="description"
                 android:textAlignment="center"
-                android:textColorHint="@color/colorAccent"
+
                 android:textColor="@color/cardview_light_background"/>
 
             <Button

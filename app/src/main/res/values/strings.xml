@@ -21,4 +21,12 @@
     <string name="activate_changes">Change language</string>
     <string name="loading">loading</string>
     <string name="languages_prompt">Chose a language</string>
+    <string name="event_text_hint">Event text</string>
+    <string name="add_event">add event</string>
+    <string name="next_event">next event</string>
+    <string name="email">email</string>
+    <string name="full_name">Full name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="redact">Redact</string>
+    <string name="about">About yourself</string>
 </resources>

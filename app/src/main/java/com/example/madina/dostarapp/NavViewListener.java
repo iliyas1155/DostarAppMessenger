@@ -52,7 +52,6 @@ public class NavViewListener implements NavigationView.OnNavigationItemSelectedL
         if (id == R.id.nav_sign_out) {
             ((SampleActivity)context).signOut();
         }
-        ((Activity)context).finish();
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

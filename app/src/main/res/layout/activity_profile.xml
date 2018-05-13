@@ -38,11 +38,10 @@
                 android:layout_above="@+id/phone_field"
                 android:layout_centerHorizontal="true"
                 android:ems="10"
-                android:hint="адрес"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:shadowColor="@color/cardview_light_background"
                 android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/colorAccent"
                 tools:layout_editor_absoluteX="85dp"
                 tools:layout_editor_absoluteY="157dp" />
 
@@ -56,11 +55,10 @@
                 android:layout_marginBottom="17dp"
                 android:allowUndo="false"
                 android:ems="10"
-                android:hint="о себе"
+                android:hint="@string/about"
                 android:inputType="textPersonName"
                 android:shadowColor="@color/cardview_light_background"
                 android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/colorAccent"
                 tools:layout_editor_absoluteX="84dp"
                 tools:layout_editor_absoluteY="232dp" />
 
@@ -71,11 +69,10 @@
                 android:layout_above="@+id/name_field"
                 android:layout_centerHorizontal="true"
                 android:ems="10"
-                android:hint="телефон"
+                android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:shadowColor="@color/cardview_light_background"
                 android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/colorAccent"
                 tools:layout_editor_absoluteX="85dp"
                 tools:layout_editor_absoluteY="91dp" />
 
@@ -86,11 +83,10 @@
                 android:layout_above="@+id/about_field"
                 android:layout_centerHorizontal="true"
                 android:ems="10"
-                android:hint="Ф.И.О."
+                android:hint="@string/full_name"
                 android:inputType="textPersonName"
                 android:shadowColor="@color/cardview_light_background"
                 android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/colorAccent"
                 tools:layout_editor_absoluteX="85dp"
                 tools:layout_editor_absoluteY="28dp" />
 
@@ -102,7 +98,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="42dp"
-                android:text="реадктировать"
+                android:hint="@string/redact"
                 android:textColor="@color/cardview_light_background"/>
 
         </RelativeLayout>

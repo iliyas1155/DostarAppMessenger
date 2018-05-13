@@ -12,4 +12,12 @@
     <string name="send">отправить</string>
     <string name="activate_changes">Поменять язык</string>
     <string name="loading">загрузка</string>
+    <string name="event_text_hint">Текст события</string>
+    <string name="add_event">добавить событие</string>
+    <string name="next_event">следующее событие</string>
+    <string name="email">email</string>
+    <string name="full_name">Ф.И.О.</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="redact">Редактировать</string>
+    <string name="about">О себе</string>
 </resources>

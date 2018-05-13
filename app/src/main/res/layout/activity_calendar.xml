@@ -21,26 +21,23 @@ tools:openDrawer="start">
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     <LinearLayout
-        android:weightSum="10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
         <com.github.sundeepk.compactcalendarview.CompactCalendarView
-            android:layout_weight="7"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/calendar"
             android:layout_width="fill_parent"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:layout_height="match_parent"
+            android:layout_height="250dp"
             app:compactCalendarTargetHeight="250dp"
             app:compactCalendarTextSize="12sp"
             app:compactCalendarTextColor="#787676"
             app:compactCalendarCurrentSelectedDayBackgroundColor="#686aa3"
-            app:compactCalendarCurrentDayBackgroundColor="#2f306b"
-            app:compactCalendarMultiEventIndicatorColor="#c25353"
+            app:compactCalendarCurrentDayBackgroundColor="#3d3e74"
             >
 
         </com.github.sundeepk.compactcalendarview.CompactCalendarView>
@@ -48,9 +45,33 @@ tools:openDrawer="start">
             android:id="@+id/next_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3">
+            android:text="@string/next_event"
+            >
 
         </Button>
+
+        <EditText
+            android:id="@+id/event_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/event_text_hint"
+            >
+
+        </EditText>
+
+        <Button
+            android:id="@+id/add_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_event"
+            >
+
+        </Button>
+
+        <TextView
+            android:id="@+id/selected_date_events_output"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </LinearLayout>
