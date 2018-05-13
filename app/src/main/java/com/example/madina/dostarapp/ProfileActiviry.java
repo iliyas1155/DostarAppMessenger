@@ -1,13 +1,16 @@
 package com.example.madina.dostarapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -131,6 +134,9 @@ public class ProfileActiviry extends SampleActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         selectedGender = i;
+        TextView selectedGenderTv = ((TextView) adapterView.getChildAt(0));
+        selectedGenderTv.setTextColor(Color.WHITE);
+        selectedGenderTv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
     }
 
     @Override
