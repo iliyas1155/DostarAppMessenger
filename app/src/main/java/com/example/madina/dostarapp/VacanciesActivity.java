@@ -2,9 +2,9 @@ package com.example.madina.dostarapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import com.example.madina.dostarapp.Adapters.VacanciesAdapter;
 import com.example.madina.dostarapp.Items.Vacancy;
+import com.example.madina.dostarapp.Utils.EmailSender;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -107,6 +108,29 @@ public class VacanciesActivity extends SampleActivity {
     private void initializeData(){
         vacancies = new ArrayList<>();
         vacanciesIds = new HashMap();
+
+        final EmailSender sender = new EmailSender("iliyas1155@gmail.com", "keepcalm");
+        try {
+            Log.d(TAG, "initializeData: send mail");
+
+            AsyncTask asyncTask = new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    try {
+                        sender.sendMail("subject", "body", "iliyas1155@gmail.com", "iliyas@adr.irish");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            asyncTask.execute();
+
+        } catch (Exception e) {
+            Log.d(TAG, "initializeData: exception");
+            Log.d(TAG, "initializeData: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void getMessages(){

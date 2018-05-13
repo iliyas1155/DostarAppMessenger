@@ -32,5 +32,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.github.sundeepk:compact-calendar-view:2.0.2.3'
     compile files('YouTubeAndroidPlayerApi.jar')
+    compile files('activation.jar')
+    compile files('additionnal.jar')
+    compile files('mail.jar')
 }
 apply plugin: 'com.google.gms.google-services'
