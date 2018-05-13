@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.madina.dostarapp.Utils.SharedPreferencesUtil;
+
 import java.util.Locale;
 import static com.example.madina.dostarapp.MainActivity.userProfile;
 
@@ -25,7 +27,7 @@ public class SampleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        updateLanguage();
+        setLanguage(SharedPreferencesUtil.getLanguage(this));
         toast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
     }
 

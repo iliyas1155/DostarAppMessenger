@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.madina.dostarapp.Utils.SharedPreferencesUtil;
+
 public class SettingsActivity extends SampleActivity implements AdapterView.OnItemSelectedListener  {
     Spinner languagesSpinner;
     Button toProfile, signOut, changeLanguage;
@@ -30,6 +32,12 @@ public class SettingsActivity extends SampleActivity implements AdapterView.OnIt
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSupportActionBar().setTitle(getString(R.string.settings)); // To refresh toolbar language after language change.
+    }
+
     private void setOnClickListeners() {
         toProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +57,7 @@ public class SettingsActivity extends SampleActivity implements AdapterView.OnIt
             public void onClick(View view) {
                 setLanguage(languages[chosenLanguage]);
                 isLanguageChanged = true;
+                SharedPreferencesUtil.setLanguage(SettingsActivity.this, languages[chosenLanguage]);
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
