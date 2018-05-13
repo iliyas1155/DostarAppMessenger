@@ -12,7 +12,7 @@ public class SettingsActivity extends SampleActivity implements AdapterView.OnIt
     Spinner languagesSpinner;
     Button toProfile, signOut, changeLanguage;
     String[] languages = {"ru","en"};
-    int chosenLanguage = 0;
+    static int chosenLanguage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
