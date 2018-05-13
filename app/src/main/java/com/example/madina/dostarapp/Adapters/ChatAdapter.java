@@ -1,7 +1,9 @@
 package com.example.madina.dostarapp.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder>{
+    private Context context;
     private List<ChatMessage> messagesList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -38,6 +41,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder>{
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.message_form, viewGroup, false);
+        context = v.getContext();
         MyViewHolder mvh = new MyViewHolder(v);
         return mvh;
     }
@@ -48,11 +52,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder>{
         Date date = new Date(message.getMessageTime());
         holder.title.setText(message.getMessageText());
         holder.user.setText(message.getMessageUser());
-        holder.time.setText(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(date));
+        holder.time.setText(getFormattedDateTime(date));
     }
 
     @Override
     public int getItemCount() {
         return messagesList.size();
+    }
+
+    private String getFormattedDateTime(Date date) {
+        return DateFormat.getDateFormat(context).format(date) + " "
+                + DateFormat.getTimeFormat(context).format(date);
     }
 }
