@@ -34,10 +34,17 @@
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background" />
 
+            <fragment
+                android:name="com.google.android.youtube.player.YouTubePlayerFragment"
+                android:id="@+id/youtube_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
             <TextView
                 android:id="@+id/course_description"
                 android:layout_width="match_parent"
-                android:layout_height="135dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
