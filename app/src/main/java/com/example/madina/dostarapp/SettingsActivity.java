@@ -13,6 +13,7 @@ public class SettingsActivity extends SampleActivity implements AdapterView.OnIt
     Button toProfile, signOut, changeLanguage;
     String[] languages = {"ru","en"};
     static int chosenLanguage = 0;
+    static boolean isLanguageChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class SettingsActivity extends SampleActivity implements AdapterView.OnIt
             @Override
             public void onClick(View view) {
                 setLanguage(languages[chosenLanguage]);
+                isLanguageChanged = true;
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
@@ -63,5 +65,16 @@ public class SettingsActivity extends SampleActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         Log.d("Printing","onNothingSelected()");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isLanguageChanged) {
+            Intent refreshMenu = new Intent(this, MenuActivity.class);
+            refreshMenu.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(refreshMenu);
+            finish();
+        }
+        super.onBackPressed();
     }
 }

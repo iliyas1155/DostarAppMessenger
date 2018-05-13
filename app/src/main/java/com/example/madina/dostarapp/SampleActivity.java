@@ -54,7 +54,7 @@ public class SampleActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             default:
-                finish();
+                onBackPressed();
                 break;
         }
         return true;
