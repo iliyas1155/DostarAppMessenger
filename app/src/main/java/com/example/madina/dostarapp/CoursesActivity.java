@@ -104,10 +104,9 @@ public class CoursesActivity extends SampleActivity {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 String name = (String) document.getData().get("name");
                                 String desc = (String) document.getData().get("desc");
-                                String text = (String) document.getData().get("text");
+                                String url = (String) document.getData().get("url");
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                Course course = new Course(name, desc);
-                                course.setText(text);
+                                Course course = new Course(name, desc, url);
                                 course.createdAt = createdAt;
                                 courses.add(course);
                             }

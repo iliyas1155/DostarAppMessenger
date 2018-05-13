@@ -26,14 +26,6 @@
             android:orientation="vertical"
             android:background="@drawable/background_image">
 
-            <TextView
-                android:id="@+id/course_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                android:textColor="@color/cardview_light_background" />
-
             <fragment
                 android:name="com.google.android.youtube.player.YouTubePlayerFragment"
                 android:id="@+id/youtube_fragment"
