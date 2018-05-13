@@ -3,6 +3,7 @@ package com.example.madina.dostarapp;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -82,7 +83,9 @@ public class VacancyActivity extends SampleActivity {
                 @Override
                 protected Object doInBackground(Object[] objects) {
                     try {
-                        sender.sendMail(vacancy.name, MainActivity.userProfile.getResume(), "iliyas1155@gmail.com", "iliyas@adr.irish");
+                        String resume = getResume();
+                        sender.sendMail(vacancy.name, resume, "iliyas1155@gmail.com", vacancy.ownerEmail);
+                        Log.d("EmailsSendong","name: " + vacancy.name + "\tresume: " + getResume());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -55,14 +55,17 @@ public class EmailSender extends javax.mail.Authenticator {
         return new PasswordAuthentication(user, password);
     }
 
-    public void sendMail(String subject, String body, String sender, String recipients) throws Exception {
+    public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception
+    {
         MimeMessage message = new MimeMessage(session);
         DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
         message.setSender(new InternetAddress(sender));
         message.setSubject(subject);
 
+        message.setText(body);
         message.setDataHandler(handler);
-        message.setContent(_multipart);
+        if(_multipart.getCount() > 0)
+            message.setContent(_multipart);
         if (recipients.indexOf(',') > 0)
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
         else
@@ -71,7 +74,8 @@ public class EmailSender extends javax.mail.Authenticator {
 
     }
 
-    public void addAttachment(String filename) throws Exception {
+    public void addAttachment(String filename) throws Exception
+    {
         BodyPart messageBodyPart = new MimeBodyPart();
         DataSource source = new FileDataSource(filename);
         messageBodyPart.setDataHandler(new DataHandler(source));
@@ -80,41 +84,49 @@ public class EmailSender extends javax.mail.Authenticator {
         _multipart.addBodyPart(messageBodyPart);
     }
 
-    public class ByteArrayDataSource implements DataSource {
+    public class ByteArrayDataSource implements DataSource
+    {
         private byte[] data;
         private String type;
 
-        public ByteArrayDataSource(byte[] data, String type) {
+        public ByteArrayDataSource(byte[] data, String type)
+        {
             super();
             this.data = data;
             this.type = type;
         }
 
-        public ByteArrayDataSource(byte[] data) {
+        public ByteArrayDataSource(byte[] data)
+        {
             super();
             this.data = data;
         }
 
-        public void setType(String type) {
+        public void setType(String type)
+        {
             this.type = type;
         }
 
-        public String getContentType() {
+        public String getContentType()
+        {
             if (type == null)
                 return "application/octet-stream";
             else
                 return type;
         }
 
-        public InputStream getInputStream() throws IOException {
+        public InputStream getInputStream() throws IOException
+        {
             return new ByteArrayInputStream(data);
         }
 
-        public String getName() {
+        public String getName()
+        {
             return "ByteArrayDataSource";
         }
 
-        public OutputStream getOutputStream() throws IOException {
+        public OutputStream getOutputStream() throws IOException
+        {
             throw new IOException("Not Supported");
         }
     }

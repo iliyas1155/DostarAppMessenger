@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:ems="10"
-                    android:hint="@string/email"
+                    android:hint="@string/address"
                     android:inputType="textEmailAddress"
                     android:shadowColor="@color/cardview_light_background"
                     android:textColor="@color/cardview_light_background" />
