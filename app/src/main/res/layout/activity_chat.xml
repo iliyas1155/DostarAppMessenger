@@ -64,10 +64,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Input"
+                    android:backgroundTint="@color/colorAccent"
                     android:id="@+id/input_edit_text"
                     android:textColor="@color/cardview_light_background"
-                    android:textColorHint="@color/cardview_light_background"
-                    android:textColorHighlight="@color/cardview_light_background"
                     />
             </android.support.design.widget.TextInputLayout>
 
