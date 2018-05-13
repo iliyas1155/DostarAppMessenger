@@ -5,18 +5,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.madina.dostarapp.Items.Vacancy;
 import com.example.madina.dostarapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>{
+public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder> 
+        implements Filterable {
 
     private List<Vacancy> vacancies;
+    private List<Vacancy> filteredVacancies;
+    
     public VacanciesAdapter(List<Vacancy> vacancies){
         this.vacancies = vacancies;
+        this.filteredVacancies = vacancies;
     }
 
     @Override
@@ -28,13 +35,13 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Vaca
 
     @Override
     public void onBindViewHolder(VacancyViewHolder vacancyViewHolder, int i) {
-        vacancyViewHolder.vacancy_name.setText(vacancies.get(i).name);
-        vacancyViewHolder.vacancy_desc.setText(vacancies.get(i).desc);
+        vacancyViewHolder.vacancy_name.setText(filteredVacancies.get(i).name);
+        vacancyViewHolder.vacancy_desc.setText(filteredVacancies.get(i).desc);
     }
 
     @Override
     public int getItemCount() {
-        return vacancies.size();
+        return filteredVacancies.size();
     }
 
     @Override
@@ -53,5 +60,37 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Vaca
             vacancy_name = itemView.findViewById(R.id.item_name);
             vacancy_desc = itemView.findViewById(R.id.item_desc);
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String query = charSequence.toString();
+                List<Vacancy> filtered = new ArrayList<>();
+
+                if (query.isEmpty()) {
+                    filtered = vacancies;
+                } else {
+                    for (Vacancy vacancy : vacancies) {
+                        if (vacancy.name.contains(query)) {
+                            filtered.add(vacancy);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.count = filtered.size();
+                results.values = filtered;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence query, FilterResults filterResults) {
+                filteredVacancies = (ArrayList<Vacancy>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

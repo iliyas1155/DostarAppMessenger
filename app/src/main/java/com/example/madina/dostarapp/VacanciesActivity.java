@@ -2,19 +2,19 @@ package com.example.madina.dostarapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.madina.dostarapp.Adapters.VacanciesAdapter;
 import com.example.madina.dostarapp.Items.Vacancy;
-import com.example.madina.dostarapp.Utils.EmailSender;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -77,16 +77,6 @@ public class VacanciesActivity extends SampleActivity {
                 })
         );
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            default:
-                finish();
-                break;
-        }
-        return true;
-    }
 
     @Override
     protected void onResume() {
@@ -142,5 +132,31 @@ public class VacanciesActivity extends SampleActivity {
                     }
                 });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+
+        SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setQueryHint(getString(R.string.courses_search));
+        mSearchView.setOnQueryTextListener(new QueryListener());
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    private class QueryListener implements SearchView.OnQueryTextListener {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            adapter.getFilter().filter(query);
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String query) {
+            adapter.getFilter().filter(query);
+            return false;
+        }
     }
 }
