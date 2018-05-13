@@ -34,4 +34,7 @@
     <string name="respond_failure">Responding error, try later</string>
     <string name="respond_already_done">You are already responding current vacancy</string>
     <string name="password">password</string>
+    <string name="course_title">course title</string>
+    <string name="course_description">course description</string>
+    <string name="youtube_link">YouTube URL</string>
 </resources>

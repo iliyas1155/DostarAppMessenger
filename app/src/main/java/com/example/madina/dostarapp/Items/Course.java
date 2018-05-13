@@ -5,15 +5,12 @@ import java.util.Date;
 public class Course {
     public String name;
     public String desc;
-    public String text;
+    public String url;
     public long createdAt;
-    public Course(String name, String desc) {
+    public Course(String name, String desc, String url) {
         this.name = name;
         this.desc = desc;
+        this.url = url;
         this.createdAt = new Date().getTime();
-    }
-
-    public void setText(String text){
-        this.text = text;
     }
 }

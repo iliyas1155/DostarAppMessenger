@@ -28,6 +28,7 @@ public class MenuActivity extends SampleActivity {
     protected void onStart() {
         super.onStart();
         setSupportActionBarIcon();
+        getSupportActionBar().setTitle(getString(R.string.home));
     }
 
     private void setOnClickListeners() {

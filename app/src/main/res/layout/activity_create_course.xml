@@ -24,42 +24,43 @@
             android:layout_width="match_parent" android:layout_height="match_parent"
             android:padding="16dp"
             android:orientation="vertical"
+            android:weightSum="8"
             android:background="@drawable/background_image">
 
             <EditText
-                android:layout_marginTop="16dp"
+                android:layout_weight="2"
                 android:id="@+id/course_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="name"
+                android:layout_height="0dp"
+                android:hint="@string/course_title"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 
             <EditText
+                android:layout_weight="3"
                 android:id="@+id/course_description"
                 android:layout_width="match_parent"
-                android:layout_height="135dp"
-                android:layout_marginTop="16dp"
-                android:hint="description"
+                android:layout_height="0dp"
+                android:hint="@string/course_description"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 
             <EditText
-                android:id="@+id/course_text"
+                android:layout_weight="1"
+                android:id="@+id/youtube_link"
                 android:layout_width="match_parent"
-                android:layout_height="181dp"
-                android:layout_marginTop="16dp"
-                android:hint="text"
+                android:layout_height="0dp"
+                android:hint="@string/youtube_link"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 
             <Button
+                android:layout_weight="2"
                 android:id="@+id/create_button"
                 style="@android:style/Widget.Holo.Light.Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="create course"
+                android:layout_height="0dp"
+                android:text="@string/create_course"
                 android:textColor="@color/cardview_light_background" />
 
         </LinearLayout>

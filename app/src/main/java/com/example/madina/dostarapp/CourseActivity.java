@@ -16,7 +16,7 @@ public class CourseActivity extends SampleActivity implements YouTubePlayer.OnIn
 
     Course course;
 
-    TextView titleTextView, descTextView, textTextView;
+    TextView descTextView;
     YouTubePlayerFragment youtubeFragment;
 
     @Override
@@ -24,15 +24,11 @@ public class CourseActivity extends SampleActivity implements YouTubePlayer.OnIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        titleTextView = findViewById(R.id.course_title);
         descTextView = findViewById(R.id.course_description);
-        textTextView = findViewById(R.id.course_text);
 
         course = getSelectedCourse();
 
-        titleTextView.setText(course.name);
         descTextView.setText(course.desc);
-        textTextView.setText(course.text);
 
         initYoutubeFragment();
     }
@@ -52,7 +48,15 @@ public class CourseActivity extends SampleActivity implements YouTubePlayer.OnIn
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
-            player.cueVideo("nCgQDjiotG0"); // todo: Add dynamic link.
+            String url = course.url;
+            int startIndex = url.indexOf("=");
+            int endIndex = url.indexOf("&");
+            if(!url.contains("&")){
+                endIndex = url.length();
+            }
+            url = url.substring(startIndex + 1, endIndex);
+
+            player.cueVideo(url);
         }
     }
 
