@@ -55,7 +55,7 @@ public class SampleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            default:
+            case android.R.id.home:
                 onBackPressed();
                 break;
         }
