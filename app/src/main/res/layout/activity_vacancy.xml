@@ -52,6 +52,7 @@
                 android:textColor="@color/cardview_light_background" />
             <Button
                 android:layout_weight="2"
+                style="@android:style/Widget.Holo.Light.Button"
                 android:text="@string/respond"
                 android:id="@+id/respond_button"
                 android:layout_width="match_parent"

@@ -14,13 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/password_field"
-        android:hint="email"
-        android:textColor="@color/cardview_light_background"
-        android:textColorHint="@color/cardview_light_background"
-        android:textColorHighlight="@color/cardview_light_background"
-        android:padding="16dp"
         android:layout_marginBottom="16dp"
-        />
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/password_field"
@@ -30,10 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="16dp"
-        android:textColor="@color/cardview_light_background"
-        android:textColorHint="@color/cardview_light_background"
-        android:textColorHighlight="@color/cardview_light_background"
-        android:hint="password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="16dp" />
 
@@ -45,10 +39,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="16dp"
-        android:hint="name"
-        android:textColor="@color/cardview_light_background"
-        android:textColorHint="@color/cardview_light_background"
-        android:textColorHighlight="@color/cardview_light_background"
+        android:hint="@string/full_name"
         android:inputType="textPersonName"
         android:padding="16dp" />
 
@@ -60,6 +51,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        android:text="sign up"
+        android:text="@string/sign_up"
         android:textColor="@color/cardview_light_background" />
 </RelativeLayout>
