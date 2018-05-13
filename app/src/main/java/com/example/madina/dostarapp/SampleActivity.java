@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -18,11 +19,13 @@ public class SampleActivity extends AppCompatActivity {
     private static String language = "en";
     private DrawerLayout drawer;
     private Toolbar toolbar;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateLanguage();
+        toast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -60,6 +63,7 @@ public class SampleActivity extends AppCompatActivity {
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setTitle(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);
         }
 
@@ -95,5 +99,10 @@ public class SampleActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    protected void showToastMessage(String toastMessage){
+        toast.setText(toastMessage);
+        toast.show();
     }
 }

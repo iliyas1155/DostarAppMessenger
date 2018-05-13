@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class CreateVacancyActivity extends SampleActivity {
     private static final String TAG = "CreateCourseActivity";
     private FirebaseFirestore db;
@@ -38,7 +40,7 @@ public class CreateVacancyActivity extends SampleActivity {
                 String title = titleEditText.getText().toString();
                 String desc = descEditText.getText().toString();
                 String contacts = contactsEditText.getText().toString();
-                Vacancy vacancy = new Vacancy(title, desc);
+                Vacancy vacancy = new Vacancy(title, desc, new ArrayList<String>());
                 vacancy.setContacts(contacts);
                 //has to be uploaded to DB
                 addVacancy(vacancy);

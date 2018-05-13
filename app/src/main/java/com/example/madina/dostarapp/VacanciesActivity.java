@@ -22,6 +22,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VacanciesActivity extends SampleActivity {
@@ -32,6 +33,8 @@ public class VacanciesActivity extends SampleActivity {
     private Button create;
     private static List<Vacancy> vacancies;
     private static int selectedVacancy;
+    private static HashMap<Vacancy, String> vacanciesIds;
+    public static final String COLLECTION_NAME = "vacancies";
     VacanciesAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,13 +100,18 @@ public class VacanciesActivity extends SampleActivity {
         return vacancies.get(selectedVacancy);
     }
 
+    public static String getSelectedVacancyId(){
+        return vacanciesIds.get(vacancies.get(selectedVacancy));
+    }
+
     private void initializeData(){
         vacancies = new ArrayList<>();
+        vacanciesIds = new HashMap();
     }
 
     private void getMessages(){
         showProgressDialog();
-        db.collection("vacancies").orderBy("createdAt", Query.Direction.DESCENDING)
+        db.collection(COLLECTION_NAME).orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -115,11 +123,16 @@ public class VacanciesActivity extends SampleActivity {
                                 String name = (String) document.getData().get("name");
                                 String desc = (String) document.getData().get("desc");
                                 String contacts = (String) document.getData().get("contacts");
+                                List<String> responding = (List<String>) document.getData().get("responding");
+                                if(responding == null){
+                                    responding = new ArrayList();
+                                }
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                Vacancy vacancy = new Vacancy(name, desc);
+                                Vacancy vacancy = new Vacancy(name, desc, responding);
                                 vacancy.setContacts(contacts);
                                 vacancy.createdAt = createdAt;
                                 vacancies.add(vacancy);
+                                vacanciesIds.put(vacancy, document.getId());
                             }
                             adapter.notifyDataSetChanged();
                             hideProgressDialog();

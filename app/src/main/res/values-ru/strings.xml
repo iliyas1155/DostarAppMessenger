@@ -20,4 +20,8 @@
     <string name="phone_number">Номер телефона</string>
     <string name="redact">Редактировать</string>
     <string name="about">О себе</string>
+    <string name="respond">Отозваться на вакансию</string>
+    <string name="respond_success">Вы успешно отозвались на вакансию</string>
+    <string name="respond_failure">Ошибка, попробуйте позже</string>
+    <string name="respond_already_done">Вы уже откликнулись на данную вакансию</string>
 </resources>

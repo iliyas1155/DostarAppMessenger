@@ -29,4 +29,8 @@
     <string name="phone_number">Phone number</string>
     <string name="redact">Redact</string>
     <string name="about">About yourself</string>
+    <string name="respond">Respond on vacancy</string>
+    <string name="respond_success">You are now responded on current vacancy</string>
+    <string name="respond_failure">Responding error, try later</string>
+    <string name="respond_already_done">You are already responding current vacancy</string>
 </resources>
