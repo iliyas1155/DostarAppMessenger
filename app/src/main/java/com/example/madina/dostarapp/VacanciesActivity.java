@@ -108,29 +108,6 @@ public class VacanciesActivity extends SampleActivity {
     private void initializeData(){
         vacancies = new ArrayList<>();
         vacanciesIds = new HashMap();
-
-        final EmailSender sender = new EmailSender("iliyas1155@gmail.com", "keepcalm");
-        try {
-            Log.d(TAG, "initializeData: send mail");
-
-            AsyncTask asyncTask = new AsyncTask() {
-                @Override
-                protected Object doInBackground(Object[] objects) {
-                    try {
-                        sender.sendMail("subject", "body", "iliyas1155@gmail.com", "iliyas@adr.irish");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                }
-            };
-            asyncTask.execute();
-
-        } catch (Exception e) {
-            Log.d(TAG, "initializeData: exception");
-            Log.d(TAG, "initializeData: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
     private void getMessages(){
@@ -146,14 +123,13 @@ public class VacanciesActivity extends SampleActivity {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 String name = (String) document.getData().get("name");
                                 String desc = (String) document.getData().get("desc");
-                                String contacts = (String) document.getData().get("contacts");
+                                String ownerEmail = (String) document.getData().get("ownerEmail");
                                 List<String> responding = (List<String>) document.getData().get("responding");
                                 if(responding == null){
                                     responding = new ArrayList();
                                 }
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                Vacancy vacancy = new Vacancy(name, desc, responding);
-                                vacancy.setContacts(contacts);
+                                Vacancy vacancy = new Vacancy(ownerEmail, name, desc, responding);
                                 vacancy.createdAt = createdAt;
                                 vacancies.add(vacancy);
                                 vacanciesIds.put(vacancy, document.getId());

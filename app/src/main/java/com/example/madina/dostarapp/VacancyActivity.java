@@ -1,32 +1,25 @@
 package com.example.madina.dostarapp;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.madina.dostarapp.Items.Vacancy;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.madina.dostarapp.Utils.EmailSender;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.madina.dostarapp.VacanciesActivity.getSelectedVacancy;
 import static com.example.madina.dostarapp.VacanciesActivity.getSelectedVacancyId;
 
 public class VacancyActivity extends SampleActivity {
 
-    TextView titleTextView, descTextView, coursesTextView;
+    TextView titleTextView, descTextView;
 
     Button responeOnVacancy;
     Vacancy vacancy;
@@ -40,7 +33,6 @@ public class VacancyActivity extends SampleActivity {
 
         titleTextView = findViewById(R.id.vacancy_title);
         descTextView = findViewById(R.id.vacancy_description);
-        coursesTextView = findViewById(R.id.vacancy_contacts);
         responeOnVacancy = findViewById(R.id.respond_button);
 
         vacancy = getSelectedVacancy();
@@ -49,7 +41,6 @@ public class VacancyActivity extends SampleActivity {
 
         titleTextView.setText(vacancy.name);
         descTextView.setText(vacancy.desc);
-        coursesTextView.setText(vacancy.contacts);
         responeOnVacancy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +53,7 @@ public class VacancyActivity extends SampleActivity {
         boolean userAdded = vacancy.addResponding(MainActivity.currentUser.getUid());
         if(userAdded) {
             showProgressDialog();
+            sendEmailToOwner();
             db.collection(VacanciesActivity.COLLECTION_NAME).document(vacancyId)
                     .set(vacancy, SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -80,6 +72,27 @@ public class VacancyActivity extends SampleActivity {
                     });
         }else{
             showToastMessage(getString(R.string.respond_already_done));
+        }
+    }
+
+    private void sendEmailToOwner() {
+        final EmailSender sender = new EmailSender("iliyas1155@gmail.com", "keepcalm");
+        try {
+            AsyncTask asyncTask = new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    try {
+                        sender.sendMail(vacancy.name, MainActivity.userProfile.getResume(), "iliyas1155@gmail.com", "iliyas@adr.irish");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+            asyncTask.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

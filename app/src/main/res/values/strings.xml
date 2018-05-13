@@ -17,6 +17,10 @@
         <item>Russian</item>
         <item>English</item>
     </string-array>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
     <string name="send">send</string>
     <string name="activate_changes">Change language</string>
     <string name="loading">loading</string>
@@ -37,4 +41,11 @@
     <string name="course_title">course title</string>
     <string name="course_description">course description</string>
     <string name="youtube_link">YouTube URL</string>
+    <string name="work_experience">work experience</string>
+    <string name="address">address</string>
+    <string name="skills">skills</string>
+    <string name="education">education</string>
+    <string name="gender">gender</string>
+    <string name="profile_update_failure">profile update failed, try later</string>
+    <string name="profile_update_success">profile updated</string>
 </resources>

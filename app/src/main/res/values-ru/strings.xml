@@ -9,6 +9,10 @@
         <item>Русский</item>
         <item>Английский</item>
     </string-array>
+    <string-array name="gender">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
     <string name="send">отправить</string>
     <string name="activate_changes">Поменять язык</string>
     <string name="loading">загрузка</string>
@@ -28,4 +32,11 @@
     <string name="course_title">название курса</string>
     <string name="course_description">описание курса</string>
     <string name="youtube_link">YouTube ссылка</string>
+    <string name="work_experience">опыт работы</string>
+    <string name="address">адрес</string>
+    <string name="skills">навыки</string>
+    <string name="education">образование</string>
+    <string name="gender">пол</string>
+    <string name="profile_update_failure">обновление профиля провалилось, попробуйте позже</string>
+    <string name="profile_update_success">профиль обновлён</string>
 </resources>

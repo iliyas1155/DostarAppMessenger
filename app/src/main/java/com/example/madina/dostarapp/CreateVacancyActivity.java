@@ -39,9 +39,8 @@ public class CreateVacancyActivity extends SampleActivity {
             public void onClick(View view) {
                 String title = titleEditText.getText().toString();
                 String desc = descEditText.getText().toString();
-                String contacts = contactsEditText.getText().toString();
-                Vacancy vacancy = new Vacancy(title, desc, new ArrayList<String>());
-                vacancy.setContacts(contacts);
+                String ownerEmail = contactsEditText.getText().toString();
+                Vacancy vacancy = new Vacancy(ownerEmail, title, desc, new ArrayList<String>());
                 //has to be uploaded to DB
                 addVacancy(vacancy);
             }
