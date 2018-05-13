@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -20,107 +21,115 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/main_layout"
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@drawable/background_image"
-            android:paddingHorizontal="26dp">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/address_field"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:ems="10"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background" />
+                android:orientation="vertical"
+                android:background="@drawable/background_image"
+                android:paddingHorizontal="26dp">
 
-            <EditText
-                android:id="@+id/name_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:ems="10"
-                android:hint="@string/full_name"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background"/>
+                <EditText
+                    android:id="@+id/address_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ems="10"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background" />
 
-            <Spinner
-                android:id="@+id/gender_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/gender"
-                android:prompt="@string/gender"
-                android:spinnerMode="dropdown" />
+                <EditText
+                    android:id="@+id/name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ems="10"
+                    android:hint="@string/full_name"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background"/>
 
-            <EditText
-                android:id="@+id/phone_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background"/>
+                <Spinner
+                    android:id="@+id/gender_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/gender"
+                    android:prompt="@string/gender"
+                    android:spinnerMode="dropdown" />
 
-            <EditText
-                android:id="@+id/about_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/about"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background" />
+                <EditText
+                    android:id="@+id/phone_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background"/>
 
-            <EditText
-                android:id="@+id/skills_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/skills"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background" />
+                <EditText
+                    android:id="@+id/about_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/about"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background" />
 
-            <EditText
-                android:id="@+id/education_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/education"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background" />
+                <EditText
+                    android:id="@+id/skills_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/skills"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background" />
 
-            <EditText
-                android:id="@+id/work_experience_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/work_experience"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/cardview_light_background"
-                android:textColor="@color/cardview_light_background" />
+                <EditText
+                    android:id="@+id/education_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/education"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background" />
 
-            <Button
-                android:id="@+id/edit_profile_button"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:hint="@string/redact"
-                android:textColor="@color/cardview_light_background"/>
+                <EditText
+                    android:id="@+id/work_experience_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/work_experience"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/cardview_light_background"
+                    android:textColor="@color/cardview_light_background" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/edit_profile_button"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:hint="@string/redact"
+                    android:textColor="@color/cardview_light_background"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
