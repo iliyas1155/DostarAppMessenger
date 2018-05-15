@@ -38,6 +38,8 @@ public class VacanciesActivity extends SampleActivity {
     private static HashMap<Vacancy, String> vacanciesIds;
     public static final String COLLECTION_NAME = "vacancies";
     private static final int VACANCIES_FILTER_REQUEST = 1000;
+    private boolean isVacanciesLoaded = false;
+    RecyclerView rv;
     VacanciesAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +48,13 @@ public class VacanciesActivity extends SampleActivity {
 
         db = FirebaseFirestore.getInstance();
         create = findViewById(R.id.create_button);
-        RecyclerView rv = findViewById(R.id.rv_vacancies);
+        rv = findViewById(R.id.rv_vacancies);
         rv.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(VacanciesActivity.this);
         rv.setLayoutManager(llm);
 
         initializeData();
-        adapter = new VacanciesAdapter(vacancies);
-        rv.setAdapter(adapter);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,9 @@ public class VacanciesActivity extends SampleActivity {
         if(MainActivity.isAdmin == false){
             create.setVisibility(View.GONE);
         }
-        getMessages();
+        if (!isVacanciesLoaded) {
+            getMessages();
+        }
     }
 
     public static Vacancy getSelectedVacancy(){
@@ -129,8 +131,11 @@ public class VacanciesActivity extends SampleActivity {
                                 vacancies.add(vacancy);
                                 vacanciesIds.put(vacancy, document.getId());
                             }
+                            adapter = new VacanciesAdapter(vacancies);
+                            rv.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             hideProgressDialog();
+                            isVacanciesLoaded = true;
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }

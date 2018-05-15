@@ -22,8 +22,8 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Vaca
     private List<Vacancy> filteredVacancies;
     
     public VacanciesAdapter(List<Vacancy> vacancies){
-        this.vacancies = vacancies;
-        this.filteredVacancies = vacancies;
+        this.vacancies = new ArrayList<>(vacancies);
+        this.filteredVacancies = new ArrayList<>(vacancies);
     }
 
     @Override
