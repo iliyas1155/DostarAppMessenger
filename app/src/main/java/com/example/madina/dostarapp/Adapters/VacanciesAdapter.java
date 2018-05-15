@@ -93,4 +93,19 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Vaca
             }
         };
     }
+
+    public void setFilter(String chosenCategory, String chosenCity) {
+        if (chosenCategory == null && chosenCity == null) {
+            filteredVacancies = vacancies;
+        } else {
+            filteredVacancies.clear();
+            for (Vacancy vacancy : vacancies) {
+                if ((chosenCategory == null && vacancy.city.equals(chosenCity))
+                        || (chosenCity == null && vacancy.category.equals(chosenCategory))
+                        || (vacancy.category.equals(chosenCategory) && vacancy.city.equals(chosenCity))) {
+                    filteredVacancies.add(vacancy);
+                }
+            }
+        }
+    }
 }

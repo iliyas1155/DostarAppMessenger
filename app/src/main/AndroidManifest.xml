@@ -41,6 +41,9 @@
         <activity android:name=".VacanciesActivity"
             android:label="@string/vacancies" />
 
+        <activity android:name=".VacanciesFilterActivity"
+            android:label="@string/vacancies_filter" />
+
         <activity
             android:name=".SignInActivity"
             android:label="@string/sign_in" />

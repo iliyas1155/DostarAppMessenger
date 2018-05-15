@@ -1,10 +1,14 @@
 package com.example.madina.dostarapp.Items;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Vacancy {
+public class Vacancy implements Parcelable {
     public String name;
     public String category;
     public String region;
@@ -31,5 +35,43 @@ public class Vacancy {
         }else{
             return false;
         }
+    }
+
+    // Parcelable implementation.
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(name);
+        parcel.writeString(category);
+        parcel.writeString(desc);
+        parcel.writeString(ownerEmail);
+        parcel.writeStringList(responding);
+        parcel.writeLong(createdAt);
+    }
+
+    public static final Parcelable.Creator<Vacancy> CREATOR = new Parcelable.Creator<Vacancy>() {
+        public Vacancy createFromParcel(Parcel in) {
+            return new Vacancy(in);
+        }
+
+        public Vacancy[] newArray(int size) {
+            return new Vacancy[size];
+        }
+    };
+
+    private Vacancy(Parcel parcel) {
+        if (responding == null) {
+            responding = new ArrayList<>();
+        }
+
+        name = parcel.readString();
+        category = parcel.readString();
+        desc = parcel.readString();
+        ownerEmail = parcel.readString();
+        parcel.readStringList(responding);
+        createdAt = parcel.readLong();
     }
 }

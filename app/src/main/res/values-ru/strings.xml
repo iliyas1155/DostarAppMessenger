@@ -44,6 +44,7 @@
     <string name="female">женский</string>
     <string name="courses_search">Поиск по курсам&#8230;</string>
     <string name="vacancies_search">Поиск по вакансиям&#8230;</string>
+    <string name="vacancies_filter">Фильтр вакансий</string>
     <string name="forum_search">Поиск по форуму&#8230;</string>
     <string name="gender_prompt">Выберите свой пол</string>
 </resources>

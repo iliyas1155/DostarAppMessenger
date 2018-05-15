@@ -3,6 +3,7 @@ package com.example.madina.dostarapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +37,7 @@ public class VacanciesActivity extends SampleActivity {
     private static int selectedVacancy;
     private static HashMap<Vacancy, String> vacanciesIds;
     public static final String COLLECTION_NAME = "vacancies";
+    private static final int VACANCIES_FILTER_REQUEST = 1000;
     VacanciesAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +141,7 @@ public class VacanciesActivity extends SampleActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_filter, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
         SearchView mSearchView = (SearchView) searchItem.getActionView();
@@ -147,6 +149,20 @@ public class VacanciesActivity extends SampleActivity {
         mSearchView.setOnQueryTextListener(new QueryListener());
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_filter:
+                startFilter();
+                break;
+        }
+        return true;
     }
 
     private class QueryListener implements SearchView.OnQueryTextListener {
@@ -161,5 +177,21 @@ public class VacanciesActivity extends SampleActivity {
             adapter.getFilter().filter(query);
             return false;
         }
+    }
+
+    private void startFilter() {
+        Intent startFilter = new Intent(this, VacanciesFilterActivity.class);
+        startFilter.putParcelableArrayListExtra("vacancies", (ArrayList<? extends Parcelable>) vacancies);
+        startActivityForResult(startFilter, VACANCIES_FILTER_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String chosenCategory = data.getStringExtra("chosenCategory");
+        String chosenCity     = data.getStringExtra("chosenCity");
+
+        adapter.setFilter(chosenCategory, chosenCity);
+        adapter.notifyDataSetChanged();
     }
 }
