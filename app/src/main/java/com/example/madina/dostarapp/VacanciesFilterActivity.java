@@ -52,8 +52,8 @@ public class VacanciesFilterActivity extends SampleActivity {
         cities     = new ArrayList<>();
 
         for (Vacancy vacancy : vacancies) {
-            categories.add(vacancy.category);
-            cities.add(vacancy.city);
+            categories.add(vacancy.category != null ? vacancy.category : "");
+            regions.add(vacancy.region != null ? vacancy.region : "");
         }
     }
 
@@ -123,6 +123,7 @@ public class VacanciesFilterActivity extends SampleActivity {
             data.putExtra("chosenCategory", chosenCategory);
             data.putExtra("chosenCity",     chosenCity);
             setResult(RESULT_OK, data);
+            finish();
         }
     }
 
