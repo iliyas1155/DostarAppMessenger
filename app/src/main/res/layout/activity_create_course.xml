@@ -28,11 +28,22 @@
             android:background="@drawable/background_image">
 
             <EditText
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:id="@+id/course_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:hint="@string/course_title"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="@color/cardview_light_background"/>
+
+            <EditText
+                android:layout_weight="1"
+                android:id="@+id/course_category"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:hint="@string/course_category"
+                android:inputType="text"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 
@@ -42,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:hint="@string/course_description"
+                android:inputType="text"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 
@@ -51,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:hint="@string/youtube_link"
+                android:inputType="text"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 

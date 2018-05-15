@@ -22,7 +22,7 @@ public class CreateVacancyActivity extends SampleActivity {
     private static final String TAG = "CreateCourseActivity";
     private FirebaseFirestore db;
     Button create;
-    EditText titleEditText, descEditText, contactsEditText;
+    EditText titleEditText, categoryEditText, descEditText, contactsEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +31,7 @@ public class CreateVacancyActivity extends SampleActivity {
         db = FirebaseFirestore.getInstance();
         create = findViewById(R.id.create_button);
         titleEditText = findViewById(R.id.vacancy_title);
+        categoryEditText = findViewById(R.id.vacancy_category);
         descEditText = findViewById(R.id.vacancy_description);
         contactsEditText = findViewById(R.id.vacancy_contacts);
 
@@ -38,9 +39,10 @@ public class CreateVacancyActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 String title = titleEditText.getText().toString();
+                String category = categoryEditText.getText().toString();
                 String desc = descEditText.getText().toString();
                 String ownerEmail = contactsEditText.getText().toString();
-                Vacancy vacancy = new Vacancy(ownerEmail, title, desc, new ArrayList<String>());
+                Vacancy vacancy = new Vacancy(ownerEmail, title, category, desc, new ArrayList<String>());
                 //has to be uploaded to DB
                 addVacancy(vacancy);
             }

@@ -6,13 +6,15 @@ import java.util.List;
 
 public class Vacancy {
     public String name;
+    public String category;
     public String desc;
     public String ownerEmail;
     public List<String> responding;
     public long createdAt;
-    public Vacancy(String ownerEmail, String name, String desc, List<String> responding) {
+    public Vacancy(String ownerEmail, String category, String name, String desc, List<String> responding) {
         this.ownerEmail = ownerEmail;
         this.name = name;
+        this.category = category;
         this.desc = desc;
         this.createdAt = new Date().getTime();
         this.responding = responding;

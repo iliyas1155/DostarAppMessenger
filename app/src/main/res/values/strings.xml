@@ -39,6 +39,7 @@
     <string name="respond_already_done">You are already responding current vacancy</string>
     <string name="password">password</string>
     <string name="course_title">course title</string>
+    <string name="course_category">course category</string>
     <string name="course_description">course description</string>
     <string name="youtube_link">YouTube URL</string>
     <string name="work_experience">work experience</string>
