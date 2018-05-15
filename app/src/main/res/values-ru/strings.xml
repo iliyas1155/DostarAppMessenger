@@ -13,6 +13,14 @@
         <item>Женский</item>
         <item>Мужской</item>
     </string-array>
+    <string-array name="categories">
+        <item>И.Т.</item>
+        <item>Финансы</item>
+    </string-array>
+    <string-array name="regions">
+        <item>Алматинская обл.</item>
+        <item>Атырауская обл.</item>
+    </string-array>
     <string name="send">отправить</string>
     <string name="activate_changes">Поменять язык</string>
     <string name="loading">загрузка</string>

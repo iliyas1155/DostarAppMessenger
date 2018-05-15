@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DostarApp</string>
+    <string name="app_name">Dostar</string>
     <string name="home">Home</string>
     <string name="support">Support</string>
     <string name="settings">Settings</string>
@@ -20,6 +20,14 @@
     <string-array name="gender">
         <item>Female</item>
         <item>Male</item>
+    </string-array>
+    <string-array name="categories">
+        <item>I.T.</item>
+        <item>Finance</item>
+    </string-array>
+    <string-array name="regions">
+        <item>Almaty obl.</item>
+        <item>Atyrau obl.</item>
     </string-array>
     <string name="send">send</string>
     <string name="activate_changes">Change language</string>
