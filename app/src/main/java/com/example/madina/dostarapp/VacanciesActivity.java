@@ -113,6 +113,8 @@ public class VacanciesActivity extends SampleActivity {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 String name = (String) document.getData().get("name");
                                 String category = (String) document.getData().get("category");
+                                String region = (String) document.getData().get("region");
+                                String city = (String) document.getData().get("city");
                                 String desc = (String) document.getData().get("desc");
                                 String ownerEmail = (String) document.getData().get("ownerEmail");
                                 List<String> responding = (List<String>) document.getData().get("responding");
@@ -120,7 +122,7 @@ public class VacanciesActivity extends SampleActivity {
                                     responding = new ArrayList();
                                 }
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                Vacancy vacancy = new Vacancy(ownerEmail, name, category, desc, responding);
+                                Vacancy vacancy = new Vacancy(ownerEmail, name, category, region, city, desc, responding);
                                 vacancy.createdAt = createdAt;
                                 vacancies.add(vacancy);
                                 vacanciesIds.put(vacancy, document.getId());
