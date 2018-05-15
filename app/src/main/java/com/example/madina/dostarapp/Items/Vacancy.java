@@ -46,6 +46,8 @@ public class Vacancy implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(name);
         parcel.writeString(category);
+        parcel.writeString(region);
+        parcel.writeString(city);
         parcel.writeString(desc);
         parcel.writeString(ownerEmail);
         parcel.writeStringList(responding);
@@ -69,6 +71,8 @@ public class Vacancy implements Parcelable {
 
         name = parcel.readString();
         category = parcel.readString();
+        region = parcel.readString();
+        city = parcel.readString();
         desc = parcel.readString();
         ownerEmail = parcel.readString();
         parcel.readStringList(responding);
