@@ -10,7 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.madina.dostarapp.Adapters.CousesAdapter;
 import com.example.madina.dostarapp.Items.Course;
@@ -24,13 +28,23 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class CoursesActivity extends SampleActivity {
     private static final String TAG = "CoursesActivity";
     private FirebaseFirestore db;
     Button create;
     private static List<Course> courses;
+    private List<String> categories;
     private static int selectedCourse;
+    RecyclerView rv;
     CousesAdapter adapter;
+
+    ViewGroup filterContainer;
+    Spinner categoriesSpinner;
+    Button  clearButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +53,7 @@ public class CoursesActivity extends SampleActivity {
         db = FirebaseFirestore.getInstance();
         create = findViewById(R.id.create_button);
 
-        RecyclerView rv = findViewById(R.id.rv_courses);
+        rv = findViewById(R.id.rv_courses);
         rv.setHasFixedSize(true);
         selectedCourse = -1;
 
@@ -54,8 +68,6 @@ public class CoursesActivity extends SampleActivity {
             }
         });
         initializeData();
-        adapter = new CousesAdapter(courses);
-        rv.setAdapter(adapter);
 
         rv.addOnItemTouchListener(
                 new RecyclerItemClickListener(CoursesActivity.this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
@@ -72,13 +84,16 @@ public class CoursesActivity extends SampleActivity {
                 })
         );
 
+        filterContainer = findViewById(R.id.courses_filter_container);
+        categoriesSpinner = findViewById(R.id.courses_filter_spinner);
+        clearButton = findViewById(R.id.clear_filter_button);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if(MainActivity.isAdmin == false){
-            create.setVisibility(View.GONE);
+            create.setVisibility(GONE);
         }
         getMessages();
     }
@@ -89,6 +104,7 @@ public class CoursesActivity extends SampleActivity {
 
     private void initializeData(){
         courses = new ArrayList<>();
+        categories = new ArrayList<>();
     }
 
     private void getMessages(){
@@ -100,16 +116,21 @@ public class CoursesActivity extends SampleActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             courses.clear();
+                            categories.clear();
                             for (DocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 String name = (String) document.getData().get("name");
+                                String category = (String) document.getData().get("category");
                                 String desc = (String) document.getData().get("desc");
                                 String url = (String) document.getData().get("url");
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                Course course = new Course(name, desc, url);
+                                Course course = new Course(name, category, desc, url);
                                 course.createdAt = createdAt;
                                 courses.add(course);
+                                categories.add(category != null ? category : "");
                             }
+                            adapter = new CousesAdapter(courses);
+                            rv.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             hideProgressDialog();
                         } else {
@@ -122,7 +143,7 @@ public class CoursesActivity extends SampleActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_filter, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
 
         SearchView mSearchView = (SearchView) searchItem.getActionView();
@@ -130,6 +151,20 @@ public class CoursesActivity extends SampleActivity {
         mSearchView.setOnQueryTextListener(new QueryListener());
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_filter:
+                toggleFilter();
+                break;
+        }
+        return true;
     }
 
     private class QueryListener implements SearchView.OnQueryTextListener {
@@ -144,6 +179,35 @@ public class CoursesActivity extends SampleActivity {
             adapter.getFilter().filter(query);
             return false;
         }
+    }
+
+    private void toggleFilter() {
+        if (filterContainer.getVisibility() == VISIBLE) {
+            filterContainer.setVisibility(GONE);
+            adapter.setFilter("");
+            return;
+        }
+
+        filterContainer.setVisibility(VISIBLE);
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoriesSpinner.setAdapter(categoriesAdapter);
+        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                adapter.setFilter(categories.get(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.setFilter("");
+            }
+        });
     }
 }
 

@@ -22,8 +22,8 @@ public class CousesAdapter extends RecyclerView.Adapter<CousesAdapter.CourseView
     private List<Course> filteredCourses;
 
     public CousesAdapter(List<Course> courses){
-        this.courses = courses;
-        this.filteredCourses = courses;
+        this.courses = new ArrayList<>(courses);
+        this.filteredCourses = new ArrayList<>(courses);
     }
 
     @Override
@@ -92,5 +92,19 @@ public class CousesAdapter extends RecyclerView.Adapter<CousesAdapter.CourseView
                 notifyDataSetChanged();
             }
         };
+    }
+
+    public void setFilter(String chosenCategory) {
+        if (chosenCategory == null || chosenCategory.isEmpty()) {
+            filteredCourses = courses;
+        } else {
+            filteredCourses.clear();
+            for (Course course : courses) {
+                if (course.category.equals(chosenCategory)) {
+                    filteredCourses.add(course);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

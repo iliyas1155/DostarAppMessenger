@@ -35,6 +35,33 @@
                 android:text="@string/create_course"
                 android:textColor="@color/cardview_light_background" />
 
+            <LinearLayout
+                android:id="@+id/courses_filter_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical"
+                android:background="@drawable/filter_background"
+                android:visibility="gone">
+
+                <Spinner
+                    android:id="@+id/courses_filter_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Button
+                    android:id="@+id/clear_filter_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Clear filter"
+                    android:textSize="12sp"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_courses"
                 android:layout_width="match_parent"

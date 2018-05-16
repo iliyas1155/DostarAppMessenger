@@ -20,7 +20,7 @@ public class CreateCourseActivity extends SampleActivity {
     private static final String TAG = "CreateCourseActivity";
     private FirebaseFirestore db;
     Button create;
-    EditText titleEditText, descEditText, youTubeLink;
+    EditText titleEditText, categoryEditText, descEditText, youTubeLink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,7 @@ public class CreateCourseActivity extends SampleActivity {
         db = FirebaseFirestore.getInstance();
         create = findViewById(R.id.create_button);
         titleEditText = findViewById(R.id.course_title);
+        categoryEditText = findViewById(R.id.course_category);
         descEditText = findViewById(R.id.course_description);
         youTubeLink = findViewById(R.id.youtube_link);
 
@@ -36,9 +37,10 @@ public class CreateCourseActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 String title = titleEditText.getText().toString();
+                String category = categoryEditText.getText().toString();
                 String desc = descEditText.getText().toString();
                 String url = youTubeLink.getText().toString();
-                Course course = new Course(title, desc, url);
+                Course course = new Course(title, category, desc, url);
 
                 addCourse(course);//uploading to DB
             }
