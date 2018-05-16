@@ -12,7 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.madina.dostarapp.Adapters.VacanciesAdapter;
 import com.example.madina.dostarapp.Items.Vacancy;
@@ -27,6 +30,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class VacanciesActivity extends SampleActivity {
 
     public ProgressDialog mProgressDialog;
@@ -39,8 +45,19 @@ public class VacanciesActivity extends SampleActivity {
     public static final String COLLECTION_NAME = "vacancies";
     private static final int VACANCIES_FILTER_REQUEST = 1000;
     private boolean isVacanciesLoaded = false;
+
     RecyclerView rv;
     VacanciesAdapter adapter;
+
+    ViewGroup filterContainer;
+    ViewGroup categoryFilterContainer;
+    ViewGroup cityFilterContainer;
+    TextView  categoryTv;
+    TextView  cityTv;
+    ImageView categoryDeleteIv;
+    ImageView cityDeleteIv;
+    Button    clearButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +95,23 @@ public class VacanciesActivity extends SampleActivity {
                     }
                 })
         );
+
+        // The following views are needed for filter.
+        filterContainer         = findViewById(R.id.filter_tags_container);
+        categoryFilterContainer = findViewById(R.id.filter_tag_category);
+        cityFilterContainer     = findViewById(R.id.filter_tag_city);
+        categoryTv              = findViewById(R.id.filter_category_name);
+        cityTv                  = findViewById(R.id.filter_city_name);
+        categoryDeleteIv        = findViewById(R.id.filter_tag_category_delete);
+        cityDeleteIv            = findViewById(R.id.filter_tag_city_delete);
+        clearButton             = findViewById(R.id.clear_filter_button);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if(MainActivity.isAdmin == false){
-            create.setVisibility(View.GONE);
+            create.setVisibility(GONE);
         }
         if (!isVacanciesLoaded) {
             getMessages();
@@ -193,10 +220,48 @@ public class VacanciesActivity extends SampleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String chosenCategory = data.getStringExtra("chosenCategory");
-        String chosenCity     = data.getStringExtra("chosenCity");
-
+        final String chosenCategory = data.getStringExtra("chosenCategory");
+        final String chosenCity     = data.getStringExtra("chosenCity");
         adapter.setFilter(chosenCategory, chosenCity);
-        adapter.notifyDataSetChanged();
+
+        categoryTv.setText(chosenCategory);
+        cityTv.setText(chosenCity);
+        filterContainer.setVisibility(VISIBLE);
+        categoryFilterContainer.setVisibility(VISIBLE);
+        cityFilterContainer.setVisibility(VISIBLE);
+
+        categoryDeleteIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoryFilterContainer.setVisibility(GONE);
+                if (categoryFilterContainer.getVisibility() == GONE && cityFilterContainer.getVisibility() == GONE) {
+                    filterContainer.setVisibility(GONE);
+                    adapter.setFilter(null, null);
+                } else {
+                    adapter.setFilter(null, chosenCity);
+                }
+            }
+        });
+
+        cityDeleteIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cityFilterContainer.setVisibility(GONE);
+                if (categoryFilterContainer.getVisibility() == GONE && cityFilterContainer.getVisibility() == GONE) {
+                    filterContainer.setVisibility(GONE);
+                    adapter.setFilter(null, null);
+                } else {
+                    adapter.setFilter(chosenCategory, null);
+                }
+            }
+        });
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.setFilter(null, null);
+                filterContainer.setVisibility(GONE);
+            }
+        });
     }
 }

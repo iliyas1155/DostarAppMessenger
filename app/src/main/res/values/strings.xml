@@ -29,6 +29,20 @@
         <item>Almaty obl.</item>
         <item>Atyrau obl.</item>
     </string-array>
+    <string-array name="region_almaty">
+        <item>Almaty</item>
+        <item>Talgar</item>
+        <item>Taldykorgan</item>
+        <item>Kapshagai</item>
+        <item>Tekeli</item>
+    </string-array>
+    <string-array name="region_atyrau">
+        <item>Atyrau</item>
+        <item>Makat</item>
+        <item>Kurmangazy</item>
+        <item>Makhambet</item>
+        <item>Dossor</item>
+    </string-array>
     <string name="send">send</string>
     <string name="activate_changes">Change language</string>
     <string name="loading">loading</string>

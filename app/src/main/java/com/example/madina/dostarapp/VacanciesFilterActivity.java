@@ -1,21 +1,20 @@
 package com.example.madina.dostarapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.madina.dostarapp.Items.Vacancy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class VacanciesFilterActivity extends SampleActivity {
     private static final String TAG = "VacanciesFilterActivity";
@@ -68,9 +67,9 @@ public class VacanciesFilterActivity extends SampleActivity {
         citySpinner.setOnItemSelectedListener(new CitySelectedListener());
         filterButton.setOnClickListener(new FilterListener());
 
-        categoriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-        regionsAdapter    = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, regions);
-        citiesAdapter     = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cities);
+        categoriesAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
+        regionsAdapter    = new ArrayAdapter<>(this, R.layout.spinner_item, regions);
+        citiesAdapter     = new ArrayAdapter<>(this, R.layout.spinner_item, cities);
 
         categoriesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         regionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -85,7 +84,6 @@ public class VacanciesFilterActivity extends SampleActivity {
     private class CategorySelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-            setScreenerColor(adapterView);
             chosenCategory = categories.get(position);
         }
 
@@ -96,9 +94,16 @@ public class VacanciesFilterActivity extends SampleActivity {
     private class RegionSelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-            setScreenerColor(adapterView);
-            // todo: Set cities here.
-//            cities = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.cities)));
+            String region = regions.get(position);
+            StringTokenizer tokenizer = new StringTokenizer(region);
+            String resourseName = "region_" + tokenizer.nextToken().toLowerCase();
+            int citiesArrayId = getResources().getIdentifier(resourseName, "array", getPackageName());
+            if (citiesArrayId != 0) {
+                cities.clear();
+                cities.addAll(Arrays.asList(getResources().getStringArray(citiesArrayId)));
+                citiesAdapter.notifyDataSetChanged();
+                chosenCity = cities.get(0);
+            }
         }
 
         @Override
@@ -108,7 +113,6 @@ public class VacanciesFilterActivity extends SampleActivity {
     private class CitySelectedListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-            setScreenerColor(adapterView);
             chosenCity = cities.get(position);
         }
 
@@ -119,17 +123,21 @@ public class VacanciesFilterActivity extends SampleActivity {
     private class FilterListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent data = new Intent();
-            data.putExtra("chosenCategory", chosenCategory);
-            data.putExtra("chosenCity",     chosenCity);
-            setResult(RESULT_OK, data);
-            finish();
+            passData();
         }
     }
 
-    private void setScreenerColor(AdapterView<?> adapterView) {
-        TextView selectedGenderTv = ((TextView) adapterView.getChildAt(0));
-        selectedGenderTv.setTextColor(Color.WHITE);
-        selectedGenderTv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+    @Override
+    public void onBackPressed() {
+        passData();
+        super.onBackPressed();
+    }
+
+    private void passData() {
+        Intent data = new Intent();
+        data.putExtra("chosenCategory", chosenCategory);
+        data.putExtra("chosenCity",     chosenCity);
+        setResult(RESULT_OK, data);
+        finish();
     }
 }

@@ -35,6 +35,103 @@
                 android:text="@string/create_vacancy"
                 android:textColor="@color/cardview_light_background"/>
 
+            <LinearLayout
+                android:id="@+id/filter_tags_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical"
+                android:background="@drawable/filter_background"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:id="@+id/filter_tag_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/filter_category_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:text="Category:"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/filter_category_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/filter_category_text"
+                        android:layout_centerVertical="true"
+                        android:text="whatever"
+                        android:textColor="@android:color/black"/>
+
+                    <ImageView
+                        android:id="@+id/filter_tag_category_delete"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/cross"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/filter_tag_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/filter_city_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:text="City:"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/filter_city_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/filter_city_text"
+                        android:layout_centerVertical="true"
+                        android:text="whatever"
+                        android:textColor="@android:color/black"/>
+
+                    <ImageView
+                        android:id="@+id/filter_tag_city_delete"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/cross"/>
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/clear_filter_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Clear all"
+                    android:textSize="12sp"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_vacancies"
                 android:layout_width="match_parent"

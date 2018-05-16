@@ -107,5 +107,6 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Vaca
                 }
             }
         }
+        notifyDataSetChanged();
     }
 }
