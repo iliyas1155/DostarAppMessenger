@@ -101,4 +101,5 @@
     <string name="category_filter">Category:</string>
     <string name="region_filter">Region:</string>
     <string name="city_filter">City:</string>
+    <string name="rubrick">Rubric</string>
 </resources>

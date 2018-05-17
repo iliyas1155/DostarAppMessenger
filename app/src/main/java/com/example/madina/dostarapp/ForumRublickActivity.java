@@ -85,6 +85,7 @@ public class ForumRublickActivity extends SampleActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        getSupportActionBar().setTitle(getString(R.string.rubrick));
         if(MainActivity.isAdmin == false){
             create.setVisibility(View.GONE);
         }

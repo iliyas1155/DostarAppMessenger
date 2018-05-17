@@ -65,7 +65,8 @@
             android:name=".SettingsActivity"
             android:label="@string/settings" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".ForumRublickActivity"></activity>
+        <activity android:name=".ForumRublickActivity"
+            android:label="@string/rubrick" />
     </application>
 
 </manifest>

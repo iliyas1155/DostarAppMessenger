@@ -59,4 +59,5 @@
     <string name="category_filter">Категория:</string>
     <string name="region_filter">Регион:</string>
     <string name="city_filter">Город:</string>
+    <string name="rubrick">Рубрика</string>
 </resources>

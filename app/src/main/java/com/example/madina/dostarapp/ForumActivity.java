@@ -52,7 +52,7 @@ public class ForumActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(ForumActivity.this, CreateForumTopicActivity.class);
-                myIntent.putExtra("collection", "topics");
+                myIntent.putExtra("collection", rubrick);
                 ForumActivity.this.startActivity(myIntent);
             }
         });
@@ -94,6 +94,7 @@ public class ForumActivity extends SampleActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        getSupportActionBar().setTitle(getString(R.string.forum));
         if(MainActivity.isAdmin == false){
             create.setVisibility(View.GONE);
         }
