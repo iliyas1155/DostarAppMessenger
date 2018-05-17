@@ -34,30 +34,36 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="32dp"
                 android:paddingBottom="16dp"
-                android:text="Select parameters to filter vacancies."
+                android:text="@string/select_parameters"
                 android:textSize="18sp"
                 android:textColor="@android:color/white" />
 
             <Spinner
                 android:id="@+id/category_filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp" />
+                android:prompt="@string/category_prompt"
+                android:spinnerMode="dialog" />
 
             <Spinner
                 android:id="@+id/region_filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp" />
+                android:prompt="@string/region_prompt"
+                android:spinnerMode="dialog" />
 
             <Spinner
                 android:id="@+id/city_filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
                 android:paddingTop="16dp"
-                android:paddingBottom="16dp" />
+                android:prompt="@string/city_prompt"
+                android:spinnerMode="dialog" />
 
             <Button
                 android:id="@+id/filter_button"

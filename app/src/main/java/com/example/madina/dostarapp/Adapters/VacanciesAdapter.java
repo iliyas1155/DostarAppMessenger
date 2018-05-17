@@ -2,6 +2,7 @@ package com.example.madina.dostarapp.Adapters;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,15 +95,16 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Vaca
         };
     }
 
-    public void setFilter(String chosenCategory, String chosenCity) {
-        if (chosenCategory == null && chosenCity == null) {
-            filteredVacancies = vacancies;
+    public void setFilter(String chosenCategory, String chosenRegion, String chosenCity) {
+        if (chosenCategory == null && chosenRegion == null && chosenCity == null) {
+            filteredVacancies = new ArrayList<>(vacancies);
         } else {
             filteredVacancies.clear();
             for (Vacancy vacancy : vacancies) {
-                if ((chosenCategory == null && vacancy.city.equals(chosenCity))
-                        || (chosenCity == null && vacancy.category.equals(chosenCategory))
-                        || (vacancy.category.equals(chosenCategory) && vacancy.city.equals(chosenCity))) {
+                Log.d("check", vacancy.category + "\t" + vacancy.region + "\t" + vacancy.city);
+                if ((chosenCategory == null || vacancy.category.equals(chosenCategory))
+                        && (chosenRegion == null || vacancy.region.equals(chosenRegion))
+                        && (chosenCity == null || vacancy.city.equals(chosenCity))) {
                     filteredVacancies.add(vacancy);
                 }
             }

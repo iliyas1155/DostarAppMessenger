@@ -39,7 +39,10 @@
                 android:id="@+id/filter_tags_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
                 android:orientation="vertical"
@@ -60,7 +63,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:paddingRight="8dp"
-                        android:text="Category:"
+                        android:text="@string/category_filter"
                         android:textColor="@android:color/black"/>
 
                     <TextView
@@ -84,11 +87,49 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/filter_tag_region"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/filter_region_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="8dp"
+                        android:text="@string/region_filter"
+                        android:textColor="@android:color/black"/>
+
+                    <TextView
+                        android:id="@+id/filter_region_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/filter_region_text"
+                        android:layout_centerVertical="true"
+                        android:text="whatever"
+                        android:textColor="@android:color/black"/>
+
+                    <ImageView
+                        android:id="@+id/filter_tag_region_delete"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/cross"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/filter_tag_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -98,7 +139,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:paddingRight="8dp"
-                        android:text="City:"
+                        android:text="@string/city_filter"
                         android:textColor="@android:color/black"/>
 
                     <TextView
@@ -126,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Clear all"
+                    android:text="@string/clear_filter"
                     android:textSize="12sp"
                     style="@style/Widget.AppCompat.Button.Borderless"/>
 

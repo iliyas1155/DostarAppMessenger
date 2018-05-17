@@ -17,10 +17,6 @@
         <item>И.Т.</item>
         <item>Финансы</item>
     </string-array>
-    <string-array name="regions">
-        <item>Алматинская обл.</item>
-        <item>Атырауская обл.</item>
-    </string-array>
     <string name="send">отправить</string>
     <string name="activate_changes">Поменять язык</string>
     <string name="loading">загрузка</string>
@@ -55,4 +51,12 @@
     <string name="vacancies_filter">Фильтр вакансий</string>
     <string name="forum_search">Поиск по форуму&#8230;</string>
     <string name="gender_prompt">Выберите свой пол</string>
+    <string name="category_prompt">Выберите категорию</string>
+    <string name="region_prompt">Выберите регион</string>
+    <string name="city_prompt">Выберите город</string>
+    <string name="select_parameters">Выберите параметры для фильтра</string>
+    <string name="clear_filter">Очистить фильтр</string>
+    <string name="category_filter">Категория:</string>
+    <string name="region_filter">Регион:</string>
+    <string name="city_filter">Город:</string>
 </resources>

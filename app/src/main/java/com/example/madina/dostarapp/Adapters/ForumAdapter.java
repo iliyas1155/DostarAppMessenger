@@ -15,10 +15,6 @@ import com.example.madina.dostarapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by The Great on 4/22/2018.
- */
-
 public class ForumAdapter  extends RecyclerView.Adapter<CousesAdapter.CourseViewHolder>
         implements Filterable {
     private List<ForumTopic> topics;

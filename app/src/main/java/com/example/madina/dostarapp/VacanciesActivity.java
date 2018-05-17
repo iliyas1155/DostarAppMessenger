@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -51,10 +52,13 @@ public class VacanciesActivity extends SampleActivity {
 
     ViewGroup filterContainer;
     ViewGroup categoryFilterContainer;
+    ViewGroup regionFilterContainer;
     ViewGroup cityFilterContainer;
     TextView  categoryTv;
+    TextView  regionTv;
     TextView  cityTv;
     ImageView categoryDeleteIv;
+    ImageView regionDeleteIv;
     ImageView cityDeleteIv;
     Button    clearButton;
 
@@ -99,10 +103,13 @@ public class VacanciesActivity extends SampleActivity {
         // The following views are needed for filter.
         filterContainer         = findViewById(R.id.filter_tags_container);
         categoryFilterContainer = findViewById(R.id.filter_tag_category);
+        regionFilterContainer     = findViewById(R.id.filter_tag_region);
         cityFilterContainer     = findViewById(R.id.filter_tag_city);
         categoryTv              = findViewById(R.id.filter_category_name);
+        regionTv                  = findViewById(R.id.filter_region_name);
         cityTv                  = findViewById(R.id.filter_city_name);
         categoryDeleteIv        = findViewById(R.id.filter_tag_category_delete);
+        regionDeleteIv            = findViewById(R.id.filter_tag_region_delete);
         cityDeleteIv            = findViewById(R.id.filter_tag_city_delete);
         clearButton             = findViewById(R.id.clear_filter_button);
     }
@@ -221,25 +228,41 @@ public class VacanciesActivity extends SampleActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         final String chosenCategory = data.getStringExtra("chosenCategory");
+        final String chosenRegion   = data.getStringExtra("chosenRegion");
         final String chosenCity     = data.getStringExtra("chosenCity");
-        adapter.setFilter(chosenCategory, chosenCity);
 
         categoryTv.setText(chosenCategory);
+        regionTv.setText(chosenRegion);
         cityTv.setText(chosenCity);
+
+        updateFilters();
+
         filterContainer.setVisibility(VISIBLE);
         categoryFilterContainer.setVisibility(VISIBLE);
+        regionFilterContainer.setVisibility(VISIBLE);
         cityFilterContainer.setVisibility(VISIBLE);
 
         categoryDeleteIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 categoryFilterContainer.setVisibility(GONE);
-                if (categoryFilterContainer.getVisibility() == GONE && cityFilterContainer.getVisibility() == GONE) {
+                categoryTv.setText("");
+                if (areFiltersEmpty()) {
                     filterContainer.setVisibility(GONE);
-                    adapter.setFilter(null, null);
-                } else {
-                    adapter.setFilter(null, chosenCity);
                 }
+                updateFilters();
+            }
+        });
+
+        regionDeleteIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                regionFilterContainer.setVisibility(GONE);
+                regionTv.setText("");
+                if (areFiltersEmpty()) {
+                    filterContainer.setVisibility(GONE);
+                }
+                updateFilters();
             }
         });
 
@@ -247,21 +270,38 @@ public class VacanciesActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 cityFilterContainer.setVisibility(GONE);
-                if (categoryFilterContainer.getVisibility() == GONE && cityFilterContainer.getVisibility() == GONE) {
+                cityTv.setText("");
+                if (areFiltersEmpty()) {
                     filterContainer.setVisibility(GONE);
-                    adapter.setFilter(null, null);
-                } else {
-                    adapter.setFilter(chosenCategory, null);
                 }
+                updateFilters();
             }
         });
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.setFilter(null, null);
+                adapter.setFilter(null, null, null);
                 filterContainer.setVisibility(GONE);
             }
         });
+    }
+
+    private boolean areFiltersEmpty(){
+        if (categoryFilterContainer.getVisibility() == GONE && regionFilterContainer.getVisibility() == GONE && cityFilterContainer.getVisibility() == GONE) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private void updateFilters(){
+        String category = categoryTv.getText().toString();
+        String region = regionTv.getText().toString();
+        String city = cityTv.getText().toString();
+        category = category.isEmpty() ? null : category;
+        region = region.isEmpty() ? null : region;
+        city = city.isEmpty() ? null : city;
+        adapter.setFilter(category, region, city);
     }
 }

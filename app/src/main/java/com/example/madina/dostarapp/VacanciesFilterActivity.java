@@ -13,11 +13,15 @@ import com.example.madina.dostarapp.Items.Vacancy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.StringTokenizer;
 
 public class VacanciesFilterActivity extends SampleActivity {
     private static final String TAG = "VacanciesFilterActivity";
+
+    private HashMap<String, Integer> regionsPaths;
 
     private List<Vacancy> vacancies;
     private List<String>  categories;
@@ -25,6 +29,7 @@ public class VacanciesFilterActivity extends SampleActivity {
     private List<String>  cities;
 
     private String chosenCategory;
+    private String chosenRegion;
     private String chosenCity;
 
     private Spinner categorySpinner;
@@ -49,11 +54,22 @@ public class VacanciesFilterActivity extends SampleActivity {
         categories = new ArrayList<>();
         regions    = new ArrayList<>();
         cities     = new ArrayList<>();
+        regionsPaths = new HashMap();
 
+        regionsPaths.put("Атырауская область", R.array.region_atyrau);
+        regionsPaths.put("Алматинская область", R.array.region_almaty);
+        regionsPaths.put("Акмолинская область", R.array.region_akmolinsk);
+        regionsPaths.put("Павлодарская область", R.array.region_pavlodar);
+        regionsPaths.put("ЮКО", R.array.region_sowth);
+
+        regions.addAll(regionsPaths.keySet());
+        HashSet<String> categoriesUnique = new HashSet();
         for (Vacancy vacancy : vacancies) {
-            categories.add(vacancy.category != null ? vacancy.category : "");
-            regions.add(vacancy.region != null ? vacancy.region : "");
+            if(vacancy.category != null){
+                categoriesUnique.add(vacancy.category);
+            }
         }
+        categories.addAll(categoriesUnique);
     }
 
     private void init() {
@@ -95,10 +111,12 @@ public class VacanciesFilterActivity extends SampleActivity {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
             String region = regions.get(position);
+            chosenRegion = region;
             StringTokenizer tokenizer = new StringTokenizer(region);
             String resourseName = "region_" + tokenizer.nextToken().toLowerCase();
-            int citiesArrayId = getResources().getIdentifier(resourseName, "array", getPackageName());
-            if (citiesArrayId != 0) {
+//            int citiesArrayId = getResources().getIdentifier(resourseName, "array", getPackageName());
+            Integer citiesArrayId = regionsPaths.get(region);
+            if (citiesArrayId != null) {
                 cities.clear();
                 cities.addAll(Arrays.asList(getResources().getStringArray(citiesArrayId)));
                 citiesAdapter.notifyDataSetChanged();
@@ -136,6 +154,7 @@ public class VacanciesFilterActivity extends SampleActivity {
     private void passData() {
         Intent data = new Intent();
         data.putExtra("chosenCategory", chosenCategory);
+        data.putExtra("chosenRegion",   chosenRegion);
         data.putExtra("chosenCity",     chosenCity);
         setResult(RESULT_OK, data);
         finish();

@@ -26,6 +26,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -117,6 +118,8 @@ public class CoursesActivity extends SampleActivity {
                         if (task.isSuccessful()) {
                             courses.clear();
                             categories.clear();
+                            HashSet<String> categoriesUnique = new HashSet();
+
                             for (DocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 String name = (String) document.getData().get("name");
@@ -127,8 +130,11 @@ public class CoursesActivity extends SampleActivity {
                                 Course course = new Course(name, category, desc, url);
                                 course.createdAt = createdAt;
                                 courses.add(course);
-                                categories.add(category != null ? category : "");
+                                if(category != null){
+                                    categoriesUnique.add(category);
+                                }
                             }
+                            categories = new ArrayList(categoriesUnique);
                             adapter = new CousesAdapter(courses);
                             rv.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
@@ -206,6 +212,7 @@ public class CoursesActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 adapter.setFilter("");
+                filterContainer.setVisibility(GONE);
             }
         });
     }

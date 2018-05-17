@@ -1,8 +1,8 @@
 package com.example.madina.dostarapp;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -24,26 +24,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForumActivity extends SampleActivity {
-    private static final String TAG = "ForumActivity";
+public class ForumRublickActivity extends SampleActivity {
+    private static final String TAG = "ForumRubrickActivity";
     private FirebaseFirestore db;
     Button create;
-    private static List<ForumTopic> topics;
-    private static int selectedTopic;
-    private static String rubrick;
+    private static List<ForumTopic> rubricks;
+    private static int selectedRubrick;
     ForumAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forum);
+        setContentView(R.layout.activity_forum_rublick);
 
         db = FirebaseFirestore.getInstance();
         create = findViewById(R.id.create_button);
 
         RecyclerView rv = findViewById(R.id.rv_topics);
         rv.setHasFixedSize(true);
-        selectedTopic = -1;
+        selectedRubrick = -1;
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
@@ -51,24 +50,23 @@ public class ForumActivity extends SampleActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(ForumActivity.this, CreateForumTopicActivity.class);
-                myIntent.putExtra("collection", "topics");
-                ForumActivity.this.startActivity(myIntent);
+                Intent myIntent = new Intent(ForumRublickActivity.this, CreateForumTopicActivity.class);
+                myIntent.putExtra("collection", "rubricks");
+                ForumRublickActivity.this.startActivity(myIntent);
             }
         });
         initializeData();
-        adapter = new ForumAdapter(topics);
+        adapter = new ForumAdapter(rubricks);
         rv.setAdapter(adapter);
 
         rv.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, rv ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        selectedTopic = position;
-                        setChosenTopic();
+                        selectedRubrick = position;
                         Log.d(TAG, "\titem clicked:\tposition = " + position);
-                        Intent myIntent = new Intent(ForumActivity.this, ChatActivity.class);
-                        myIntent.putExtra("title", topics.get(selectedTopic).name);
-                        ForumActivity.this.startActivity(myIntent);
+                        Intent myIntent = new Intent(ForumRublickActivity.this, ForumActivity.class);
+                        myIntent.putExtra("rubrick", rubricks.get(selectedRubrick).name);
+                        ForumRublickActivity.this.startActivity(myIntent);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -76,13 +74,6 @@ public class ForumActivity extends SampleActivity {
                     }
                 })
         );
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        this.rubrick = getIntent().getStringExtra("rubrick");
-
     }
 
     @Override
@@ -100,35 +91,27 @@ public class ForumActivity extends SampleActivity {
         getMessages();
     }
 
-    private void setChosenTopic(){
-        MainActivity.chosenTopic = topics.get(selectedTopic);
-    }
-
-    public static ForumTopic getSelectedTopic(){
-        return topics.get(selectedTopic);
-    }
-
     private void initializeData(){
-        topics = new ArrayList<>();
+        rubricks = new ArrayList<>();
     }
 
     private void getMessages(){
         showProgressDialog();
-        db.collection(rubrick).orderBy("createdAt", Query.Direction.DESCENDING)
+        db.collection("rubricks").orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            topics.clear();
+                            rubricks.clear();
                             for (DocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                                 String name = (String) document.getData().get("name");
                                 String desc = (String) document.getData().get("desc");
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                ForumTopic topic = new ForumTopic(name, desc);
-                                topic.createdAt = createdAt;
-                                topics.add(topic);
+                                ForumTopic rubrick = new ForumTopic(name, desc);
+                                rubrick.createdAt = createdAt;
+                                rubricks.add(rubrick);
                             }
                             adapter.notifyDataSetChanged();
                             hideProgressDialog();
@@ -166,3 +149,4 @@ public class ForumActivity extends SampleActivity {
         }
     }
 }
+

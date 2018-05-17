@@ -96,7 +96,7 @@ public class CousesAdapter extends RecyclerView.Adapter<CousesAdapter.CourseView
 
     public void setFilter(String chosenCategory) {
         if (chosenCategory == null || chosenCategory.isEmpty()) {
-            filteredCourses = courses;
+            filteredCourses = new ArrayList(courses);
         } else {
             filteredCourses.clear();
             for (Course course : courses) {

@@ -28,7 +28,6 @@ public class MenuActivity extends SampleActivity {
     protected void onStart() {
         super.onStart();
         setSupportActionBarIcon();
-        getSupportActionBar().setTitle(getString(R.string.home));
     }
 
     private void setOnClickListeners() {
@@ -42,7 +41,7 @@ public class MenuActivity extends SampleActivity {
         toForum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MenuActivity.this, ForumActivity.class);
+                Intent myIntent = new Intent(MenuActivity.this, ForumRublickActivity.class);
                 MenuActivity.this.startActivity(myIntent);
             }
         });

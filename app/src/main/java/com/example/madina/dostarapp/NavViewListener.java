@@ -34,7 +34,7 @@ public class NavViewListener implements NavigationView.OnNavigationItemSelectedL
             context.startActivity(myIntent);
         }
         if (id == R.id.nav_forum) {
-            Intent myIntent = new Intent(context, ForumActivity.class);
+            Intent myIntent = new Intent(context, ForumRublickActivity.class);
             context.startActivity(myIntent);
         }
         if (id == R.id.nav_support) {

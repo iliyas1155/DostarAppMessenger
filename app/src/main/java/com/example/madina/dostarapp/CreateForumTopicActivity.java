@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class CreateForumTopicActivity extends SampleActivity {
     private static final String TAG = "CreateForumTopic";
     private FirebaseFirestore db;
+    private String collection;
     Button create;
     EditText titleEditText, descEditText;
     @Override
@@ -41,10 +42,16 @@ public class CreateForumTopicActivity extends SampleActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.collection = getIntent().getStringExtra("collection");
+    }
+
     private void addCourse(ForumTopic topic){
         showProgressDialog();//cycle of loading
         // Add a new document with a generated ID
-        db.collection("topics")
+        db.collection(collection)
                 .add(topic)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

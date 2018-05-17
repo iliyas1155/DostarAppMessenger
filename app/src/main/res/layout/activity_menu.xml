@@ -33,48 +33,48 @@
                 android:weightSum="5">
 
                 <Button
-                    android:layout_weight="1"
                     android:id="@+id/to_forum_button"
-                    style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/filter_background"
                     android:text="@string/forum" />
 
                 <Button
                     android:layout_weight="1"
                     android:id="@+id/to_courses_button"
-                    style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/filter_background"
                     android:text="@string/courses" />
 
                 <Button
                     android:layout_weight="1"
                     android:id="@+id/to_vacancies_button"
-                    style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:background="@drawable/filter_background"
                     android:text="@string/vacancies" />
 
                 <Button
                     android:id="@+id/to_calendar_button"
-                    style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
+                    android:background="@drawable/filter_background"
                     android:text="@string/calendar" />
 
                 <Button
                     android:id="@+id/to_profile_button"
-                    style="@android:style/Widget.Holo.Light.Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
+                    android:background="@drawable/filter_background"
                     android:text="@string/profile" />
             </LinearLayout>
         </RelativeLayout>
