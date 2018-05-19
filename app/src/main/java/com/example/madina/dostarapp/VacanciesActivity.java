@@ -45,7 +45,6 @@ public class VacanciesActivity extends SampleActivity {
     private static HashMap<Vacancy, String> vacanciesIds;
     public static final String COLLECTION_NAME = "vacancies";
     private static final int VACANCIES_FILTER_REQUEST = 1000;
-    private boolean isVacanciesLoaded = false;
 
     RecyclerView rv;
     VacanciesAdapter adapter;
@@ -120,9 +119,7 @@ public class VacanciesActivity extends SampleActivity {
         if(MainActivity.isAdmin == false){
             create.setVisibility(GONE);
         }
-        if (!isVacanciesLoaded) {
-            getMessages();
-        }
+        getMessages();
     }
 
     public static Vacancy getSelectedVacancy(){
@@ -169,7 +166,6 @@ public class VacanciesActivity extends SampleActivity {
                             rv.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             hideProgressDialog();
-                            isVacanciesLoaded = true;
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }

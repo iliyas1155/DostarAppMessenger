@@ -9,6 +9,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
+import static com.example.madina.dostarapp.MainActivity.currentUser;
+import static com.example.madina.dostarapp.MainActivity.isAdmin;
+
 public class NavViewListener implements NavigationView.OnNavigationItemSelectedListener{
     Context context;
     DrawerLayout drawer;
@@ -38,9 +41,16 @@ public class NavViewListener implements NavigationView.OnNavigationItemSelectedL
             context.startActivity(myIntent);
         }
         if (id == R.id.nav_support) {
-            Intent myIntent = new Intent(context, ChatActivity.class);
-            myIntent.putExtra("title", context.getString(R.string.support));
-            context.startActivity(myIntent);
+            if(isAdmin == false){
+                Intent myIntent = new Intent(context, ChatActivity.class);
+                myIntent.putExtra("collection", "support");
+                myIntent.putExtra("document", currentUser.getEmail());
+                myIntent.putExtra("title", context.getString(R.string.support));
+                context.startActivity(myIntent);
+            }else{
+                Intent myIntent = new Intent(context, AdminSupportActivity.class);
+                context.startActivity(myIntent);
+            }
         }
         if (id == R.id.nav_settings) {
             Intent myIntent = new Intent(context, SettingsActivity.class);

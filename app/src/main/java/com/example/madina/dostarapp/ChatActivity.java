@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -28,10 +29,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.madina.dostarapp.MainActivity.SUPPORT_COLLECTION;
+import static com.example.madina.dostarapp.MainActivity.isAdmin;
+
 public class ChatActivity extends SampleActivity {
     public static boolean showLoading;
     private static final String TAG = "ChatActivity";
     private FirebaseFirestore db;
+    private CollectionReference dbColectionRef;
     private Button sendMessage;
     private List<ChatMessage> messagesList;
     private EditText inputEditText;
@@ -69,15 +74,13 @@ public class ChatActivity extends SampleActivity {
     protected void onStart() {
         super.onStart();
         String title = getIntent().getStringExtra("title");
+        String document = getIntent().getStringExtra("document");
+        String collection = getIntent().getStringExtra("collection");
         getSupportActionBar().setTitle(title != null ? title : getString(R.string.app_name));
-    }
+        dbColectionRef = db.collection(collection).document(document)
+                .collection("messages");
 
-    //    private void initializeData(){
-//        messagesList = new ArrayList<>();
-//        messagesList.add(new ChatMessage("Hi", "Iliyas"));
-//        messagesList.add(new ChatMessage("Love you", "Symbat"));
-//        messagesList.add(new ChatMessage("Zhanym", "Symbat"));
-//    }
+    }
 
     private void setOnClickListener(){
         sendMessage.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +92,7 @@ public class ChatActivity extends SampleActivity {
             String sender = MainActivity.currentUser.getDisplayName();
             ChatMessage message = new ChatMessage(messageText, sender);
             addMessage(message);
-
+            getMessages();
             }
         });
 
@@ -97,7 +100,7 @@ public class ChatActivity extends SampleActivity {
 
     private void addMessage(ChatMessage message){
         // Add a new document with a generated ID
-        db.collection(topic.name)
+        dbColectionRef
                 .add(message)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -117,7 +120,7 @@ public class ChatActivity extends SampleActivity {
         if(showLoading){
             showProgressDialog();
         }
-        db.collection(topic.name).orderBy("messageTime", Query.Direction.ASCENDING)
+        dbColectionRef.orderBy("messageTime", Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

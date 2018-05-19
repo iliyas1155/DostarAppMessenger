@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -33,7 +34,9 @@ public class SampleActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        Log.d("MenuActivity", "start super super onStart()");
         super.onStart();
+        Log.d("MenuActivity", "end super super onStart()");
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

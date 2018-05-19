@@ -24,62 +24,73 @@
             android:layout_width="match_parent" android:layout_height="match_parent"
             android:padding="16dp"
             android:orientation="vertical"
+            android:weightSum="20"
             android:background="@drawable/background_image">
 
             <EditText
+                android:layout_weight="2"
                 android:layout_marginTop="16dp"
                 android:id="@+id/vacancy_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="name"
+                android:layout_height="0dp"
+                android:hint="@string/name"
                 android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/cardview_light_background"
-                android:textColorHighlight="@color/cardview_light_background"/>
+                android:textColor="@color/cardview_light_background"/>
+
+            <Spinner
+                android:layout_weight="2"
+                android:id="@+id/vacancy_region"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:prompt="@string/region_prompt"
+                android:spinnerMode="dialog" />
+
+            <Spinner
+                android:layout_weight="2"
+                android:id="@+id/vacancy_city"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:prompt="@string/city_prompt"
+                android:spinnerMode="dialog" />
 
             <EditText
+                android:layout_weight="2"
                 android:layout_marginTop="16dp"
                 android:id="@+id/vacancy_category"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="category"
+                android:layout_height="0dp"
+                android:hint="@string/category_prompt"
                 android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/cardview_light_background"
-                android:textColorHighlight="@color/cardview_light_background"/>
+                android:textColor="@color/cardview_light_background"/>
 
             <EditText
+                android:layout_weight="7"
                 android:id="@+id/vacancy_description"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:hint="description"
-                android:inputType="text"
+                android:layout_height="0dp"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
                 android:textAlignment="center"
-                android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/cardview_light_background"
-                android:textColorHighlight="@color/cardview_light_background" />
+                android:textColor="@color/cardview_light_background" />
 
             <EditText
+                android:layout_weight="2"
                 android:id="@+id/vacancy_contacts"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginTop="16dp"
-                android:hint="contacts"
+                android:layout_height="0dp"
+                android:hint="@string/contacts"
                 android:inputType="text"
                 android:textAlignment="center"
-                android:textColor="@color/cardview_light_background"
-                android:textColorHint="@color/cardview_light_background"
-                android:textColorHighlight="@color/cardview_light_background"/>
+                android:textColor="@color/cardview_light_background"/>
 
             <Button
+                android:layout_weight="3"
                 android:id="@+id/create_button"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_height="0dp"
                 android:text="create vacancy"
                 android:textColor="@color/cardview_light_background" />
 

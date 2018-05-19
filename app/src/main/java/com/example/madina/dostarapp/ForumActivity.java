@@ -30,7 +30,8 @@ public class ForumActivity extends SampleActivity {
     Button create;
     private static List<ForumTopic> topics;
     private static int selectedTopic;
-    private static String rubrick;
+    private static String RUBRICK_COLLECTION;
+    private static final String FORUM_SUPERCOLLECTION = "forum";
     ForumAdapter adapter;
 
     @Override
@@ -52,7 +53,7 @@ public class ForumActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(ForumActivity.this, CreateForumTopicActivity.class);
-                myIntent.putExtra("collection", rubrick);
+                myIntent.putExtra("collection", RUBRICK_COLLECTION);
                 ForumActivity.this.startActivity(myIntent);
             }
         });
@@ -67,6 +68,7 @@ public class ForumActivity extends SampleActivity {
                         setChosenTopic();
                         Log.d(TAG, "\titem clicked:\tposition = " + position);
                         Intent myIntent = new Intent(ForumActivity.this, ChatActivity.class);
+                        myIntent.putExtra("collection", FORUM_SUPERCOLLECTION);
                         myIntent.putExtra("title", topics.get(selectedTopic).name);
                         ForumActivity.this.startActivity(myIntent);
                     }
@@ -81,7 +83,7 @@ public class ForumActivity extends SampleActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        this.rubrick = getIntent().getStringExtra("rubrick");
+        this.RUBRICK_COLLECTION = getIntent().getStringExtra("RUBRICK_COLLECTION");
 
     }
 
@@ -115,7 +117,7 @@ public class ForumActivity extends SampleActivity {
 
     private void getMessages(){
         showProgressDialog();
-        db.collection(rubrick).orderBy("createdAt", Query.Direction.DESCENDING)
+        db.collection(RUBRICK_COLLECTION).orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -127,7 +129,7 @@ public class ForumActivity extends SampleActivity {
                                 String name = (String) document.getData().get("name");
                                 String desc = (String) document.getData().get("desc");
                                 long createdAt = (Long) document.getData().get("createdAt");
-                                ForumTopic topic = new ForumTopic(name, desc);
+                                ForumTopic topic = new ForumTopic( name, desc);
                                 topic.createdAt = createdAt;
                                 topics.add(topic);
                             }

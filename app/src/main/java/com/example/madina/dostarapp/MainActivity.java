@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.madina.dostarapp.Adapters.VacanciesAdapter;
 import com.example.madina.dostarapp.Items.Course;
 import com.example.madina.dostarapp.Items.ForumTopic;
+import com.example.madina.dostarapp.Items.Vacancy;
 import com.example.madina.dostarapp.Utils.UserProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,6 +34,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final String COLLECTION_USERS = "users";
+    public static final String SUPPORT_COLLECTION = "support_chat";
+    private static final String ADMINS_COLLECTION = "admins";
     private static final String TAG = "MainActivity";
     public static FirebaseAuth mAuth;
     public static UserProfile userProfile;
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isAdmin;
     public static ForumTopic chosenTopic;
     public ProgressDialog mProgressDialog;
+    private Toast toast;
     private static FirebaseFirestore db;
     Button signIn, signUp;
 
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
         signIn = findViewById(R.id.sign_in_button);
         signUp = findViewById(R.id.sign_up_button);
 
@@ -56,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         setOnClick();
-        ADMIN_EMAILS_LIST = new ArrayList();
-        ADMIN_EMAILS_LIST.add("iliyas1155@gmail.com");
+        ADMIN_EMAILS_LIST = null;
+        getAdmins();
+
         userProfile = null;
     }
 
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void setDefaultTopic(){
-        chosenTopic = new ForumTopic("support_chat", "default topic");
+        chosenTopic = new ForumTopic(SUPPORT_COLLECTION, "default topic");
     }
 
     private void setOnClick(){
@@ -92,18 +99,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public FirebaseUser getUser(){
-        return currentUser;
-    }
-
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
-        if (user != null) {
+        Log.d(TAG, "start updateUI(" + user + ")");
+        if (user != null) {// && user.isEmailVerified()
             Intent myIntent = new Intent(MainActivity.this, MenuActivity.class);
             MainActivity.this.startActivity(myIntent);
             getUserProfile(user.getUid());
         } else {
+
         }
+        Log.d(TAG, "end updateUI(" + user + ")");
     }
 
     public static void getUserProfile(final String userId){
@@ -135,6 +141,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public static void getAdmins(){
+        db.collection(ADMINS_COLLECTION)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ADMIN_EMAILS_LIST = new ArrayList();
+                            for (DocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String email = (String) document.getData().get("email");
+                                ADMIN_EMAILS_LIST.add(email);
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {
@@ -150,6 +176,11 @@ public class MainActivity extends AppCompatActivity {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+    }
+
+    private void showToastMessage(String toastMessage){
+        toast.setText(toastMessage);
+        toast.show();
     }
 
     public static void signOut() {

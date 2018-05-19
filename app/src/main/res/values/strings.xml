@@ -102,4 +102,10 @@
     <string name="region_filter">Region:</string>
     <string name="city_filter">City:</string>
     <string name="rubrick">Rubric</string>
+    <string name="name">name</string>
+    <string name="description">description</string>
+    <string name="contacts">contact email</string>
+    <string name="password_length_warning">Password length must be at least 6 symbols</string>
+    <string name="auth_success">Authentication success.</string>
+    <string name="auth_failure">Authentication failed.</string>
 </resources>

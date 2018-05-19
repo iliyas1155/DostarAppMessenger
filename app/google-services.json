@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "330503982490",
-    "firebase_url": "https://diplomka-2aef8.firebaseio.com",
-    "project_id": "diplomka-2aef8",
-    "storage_bucket": "diplomka-2aef8.appspot.com"
+    "project_number": "45914563745",
+    "firebase_url": "https://dostar-4630e.firebaseio.com",
+    "project_id": "dostar-4630e",
+    "storage_bucket": "dostar-4630e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:330503982490:android:87fcb66cc6ca320a",
-        "android_client_info": {
-          "package_name": "com.google.firebase.quickstart.auth"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "330503982490-5cc0vlnf924rvog6kikurbkts3liqn2e.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCNXpVd8IiEclxq_lhI8_P0nLtah7Am2zU"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:330503982490:android:c85a2fcd13d8b945",
+        "mobilesdk_app_id": "1:45914563745:android:0ade407dcbc22998",
         "android_client_info": {
           "package_name": "com.example.madina.dostarapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "330503982490-5cc0vlnf924rvog6kikurbkts3liqn2e.apps.googleusercontent.com",
+          "client_id": "45914563745-maid06ad3ofmcqin5l3dg0bignnr5e5c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCNXpVd8IiEclxq_lhI8_P0nLtah7Am2zU"
+          "current_key": "AIzaSyAGFpdRGaCFmjkZEVcHgKv278s77wIPj2k"
         }
       ],
       "services": {

@@ -30,6 +30,7 @@ public class ForumRublickActivity extends SampleActivity {
     Button create;
     private static List<ForumTopic> rubricks;
     private static int selectedRubrick;
+    private final String RUBRICKS_COLLECTION = "rubricks";
     ForumAdapter adapter;
 
     @Override
@@ -51,7 +52,7 @@ public class ForumRublickActivity extends SampleActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(ForumRublickActivity.this, CreateForumTopicActivity.class);
-                myIntent.putExtra("collection", "rubricks");
+                myIntent.putExtra("collection", RUBRICKS_COLLECTION);
                 ForumRublickActivity.this.startActivity(myIntent);
             }
         });
@@ -98,7 +99,7 @@ public class ForumRublickActivity extends SampleActivity {
 
     private void getMessages(){
         showProgressDialog();
-        db.collection("rubricks").orderBy("createdAt", Query.Direction.DESCENDING)
+        db.collection(RUBRICKS_COLLECTION).orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -31,11 +31,13 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     Button signUp;
     EditText emailEditText, passwordEditText, nameEditText;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        toast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
         db = FirebaseFirestore.getInstance();
 
         emailEditText = findViewById(R.id.email_field);
@@ -66,8 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             currentUser = mAuth.getCurrentUser();
-                            Toast.makeText(SignUpActivity.this, "Authentication success.",
-                                    Toast.LENGTH_SHORT).show();
+                            showToastMessage(getString(R.string.auth_success));
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(name)
@@ -88,8 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
                             updateUI(currentUser);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            showToastMessage(getString(R.string.auth_failure));
                             updateUI(null);
                         }
 
@@ -136,7 +136,8 @@ public class SignUpActivity extends AppCompatActivity {
         if (email.isEmpty()) {
             valid = false;
         }
-        if (password.isEmpty()) {
+        if (password.isEmpty() || password.length()<6) {
+            showToastMessage(getString(R.string.password_length_warning));
             valid = false;
         }
         if(name != null) {
@@ -185,6 +186,11 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 });
         // [END send_email_verification]
+    }
+
+    private void showToastMessage(String toastMessage){
+        toast.setText(toastMessage);
+        toast.show();
     }
 
 }

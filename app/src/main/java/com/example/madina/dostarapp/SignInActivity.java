@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import static com.example.madina.dostarapp.MainActivity.currentUser;
 import static com.example.madina.dostarapp.MainActivity.mAuth;
@@ -24,10 +25,12 @@ public class SignInActivity extends AppCompatActivity {
     public ProgressDialog mProgressDialog;
     Button signIn;
     EditText emailEditText, passwordEditText;
+    private Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        toast = Toast.makeText(this,"",Toast.LENGTH_SHORT);
 
         emailEditText = findViewById(R.id.email_field);
         passwordEditText = findViewById(R.id.password_field);
@@ -41,6 +44,10 @@ public class SignInActivity extends AppCompatActivity {
                 signIn(email,password);
             }
         });
+
+        if(currentUser != null){
+            emailEditText.setText(currentUser.getEmail());
+        }
     }
 
     public void signIn(String email, String password) {
@@ -60,15 +67,13 @@ public class SignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             currentUser = mAuth.getCurrentUser();
-                            Toast.makeText(SignInActivity.this, "Authentication success.",
-                                    Toast.LENGTH_SHORT).show();
+                            showToastMessage(getString(R.string.auth_success));
                             updateUI(currentUser);
                             MainActivity.getUserProfile(currentUser.getUid());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            showToastMessage(getString(R.string.auth_failure));
                             updateUI(null);
                         }
 
@@ -113,13 +118,19 @@ public class SignInActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
-        if (user != null) {
+        if (user != null) {// && user.isEmailVerified()
             Intent myIntent = new Intent(SignInActivity.this, MenuActivity.class);
             SignInActivity.this.startActivity(myIntent);
             finish();
-        } else {
-
+//        } else if(user != null && user.isEmailVerified() == false){// && user.isEmailVerified()
+//                showToastMessage("Email is not verified");
+        }else{
+            showToastMessage(getString(R.string.auth_failure));
         }
     }
 
+    private void showToastMessage(String toastMessage){
+        toast.setText(toastMessage);
+        toast.show();
+    }
 }
