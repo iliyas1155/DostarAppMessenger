@@ -17,6 +17,39 @@
         <item>И.Т.</item>
         <item>Финансы</item>
     </string-array>
+
+    <string-array name="region_almaty">
+        <item>Алматы</item>
+        <item>Талгар</item>
+        <item>Талдыкорган</item>
+        <item>Капшагай</item>
+        <item>Текели</item>
+    </string-array>
+    <string-array name="region_atyrau">
+        <item>Атырау</item>
+        <item>Макат</item>
+        <item>Курмаганзы</item>
+        <item>Махамбет</item>
+        <item>Доссор</item>
+    </string-array>
+    <string-array name="region_akmolinsk">
+        <item>Астана</item>
+        <item>Акбулак</item>
+        <item>Бурабай</item>
+        <item>Кокшетау</item>
+    </string-array>
+    <string-array name="region_sowth">
+        <item>Шымкент</item>
+        <item>Акжол</item>
+        <item>Балыкты</item>
+        <item>Арысь</item>
+    </string-array>
+    <string-array name="region_pavlodar">
+        <item>Павлодар</item>
+        <item>Екибастуз</item>
+        <item>Аксу</item>
+        <item>Баянаул</item>
+    </string-array>
     <string name="send">отправить</string>
     <string name="activate_changes">Поменять язык</string>
     <string name="loading">загрузка</string>

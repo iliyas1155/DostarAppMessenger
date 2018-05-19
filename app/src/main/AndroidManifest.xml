@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.madina.dostarapp">
+    package="com.diplomnikiiitu.dostarapp">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.diplomnikiiitu.dostarapp.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,54 +26,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatActivity" />
+        <activity android:name="com.diplomnikiiitu.dostarapp.ChatActivity" />
         <activity
-            android:name=".MenuActivity"
+            android:name="com.diplomnikiiitu.dostarapp.MenuActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".ProfileActiviry"
+            android:name="com.diplomnikiiitu.dostarapp.ProfileActiviry"
             android:label="@string/profile" />
         <activity
-            android:name=".CoursesActivity"
+            android:name="com.diplomnikiiitu.dostarapp.CoursesActivity"
             android:label="@string/courses" />
         <activity
-            android:name=".VacanciesActivity"
+            android:name="com.diplomnikiiitu.dostarapp.VacanciesActivity"
             android:label="@string/vacancies" />
         <activity
-            android:name=".VacanciesFilterActivity"
+            android:name="com.diplomnikiiitu.dostarapp.VacanciesFilterActivity"
             android:label="@string/vacancies_filter" />
         <activity
-            android:name=".SignInActivity"
+            android:name="com.diplomnikiiitu.dostarapp.SignInActivity"
             android:label="@string/sign_in" />
         <activity
-            android:name=".SignUpActivity"
+            android:name="com.diplomnikiiitu.dostarapp.SignUpActivity"
             android:label="@string/sign_up" />
         <activity
-            android:name=".CreateVacancyActivity"
+            android:name="com.diplomnikiiitu.dostarapp.CreateVacancyActivity"
             android:label="@string/create_vacancy" />
         <activity
-            android:name=".CreateCourseActivity"
+            android:name="com.diplomnikiiitu.dostarapp.CreateCourseActivity"
             android:label="@string/create_course" />
-        <activity android:name=".CourseActivity" />
-        <activity android:name=".VacancyActivity" />
+        <activity android:name="com.diplomnikiiitu.dostarapp.CourseActivity" />
+        <activity android:name="com.diplomnikiiitu.dostarapp.VacancyActivity" />
         <activity
-            android:name=".ForumActivity"
+            android:name="com.diplomnikiiitu.dostarapp.ForumActivity"
             android:label="@string/forum" />
         <activity
-            android:name=".CreateForumTopicActivity"
+            android:name="com.diplomnikiiitu.dostarapp.CreateForumTopicActivity"
             android:label="@string/forum" />
-        <activity android:name=".SampleActivity" />
+        <activity android:name="com.diplomnikiiitu.dostarapp.SampleActivity" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.diplomnikiiitu.dostarapp.SettingsActivity"
             android:label="@string/settings" />
-        <activity android:name=".CalendarActivity" />
+        <activity android:name="com.diplomnikiiitu.dostarapp.CalendarActivity" />
         <activity
-            android:name=".ForumRublickActivity"
+            android:name="com.diplomnikiiitu.dostarapp.ForumRublickActivity"
             android:label="@string/rubrick" />
         <activity
-            android:name=".AdminSupportActivity"
+            android:name="com.diplomnikiiitu.dostarapp.AdminSupportActivity"
             android:label="@string/support" />
-        <activity android:name=".TutorialActivity"
+        <activity android:name="com.diplomnikiiitu.dostarapp.TutorialActivity"
             android:label="tutorial" />
     </application>
 
