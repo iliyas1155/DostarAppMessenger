@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/filter_category_text"
                         android:layout_centerVertical="true"
-                        android:text="whatever"
+                        android:text=""
                         android:textColor="@android:color/black"/>
 
                     <ImageView
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/filter_region_text"
                         android:layout_centerVertical="true"
-                        android:text="whatever"
+                        android:text=""
                         android:textColor="@android:color/black"/>
 
                     <ImageView
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/filter_city_text"
                         android:layout_centerVertical="true"
-                        android:text="whatever"
+                        android:text=""
                         android:textColor="@android:color/black"/>
 
                     <ImageView

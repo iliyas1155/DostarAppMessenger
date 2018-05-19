@@ -36,7 +36,6 @@ import static android.view.View.VISIBLE;
 
 public class VacanciesActivity extends SampleActivity {
 
-    public ProgressDialog mProgressDialog;
     private static final String TAG = "VacanciesActivity";
     private FirebaseFirestore db;
     private Button create;
@@ -166,6 +165,8 @@ public class VacanciesActivity extends SampleActivity {
                             rv.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                             hideProgressDialog();
+
+                            updateFilters();
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
