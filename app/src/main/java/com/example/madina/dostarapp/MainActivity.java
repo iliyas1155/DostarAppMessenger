@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setTutorialShown(this);
 
-//        updateUI(currentUser);
+        updateUI(currentUser);
     }
 
     public static void setDefaultTopic(){
