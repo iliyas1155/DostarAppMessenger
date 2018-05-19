@@ -24,32 +24,31 @@
             android:layout_width="match_parent" android:layout_height="match_parent"
             android:padding="16dp"
             android:orientation="vertical"
-            android:weightSum="15"
             android:background="@drawable/background_image">
 
             <TextView
-                android:layout_weight="3"
+                android:layout_marginVertical="16dp"
                 android:id="@+id/vacancy_title"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/cardview_light_background"/>
 
             <TextView
-                android:layout_weight="8"
+                android:layout_marginVertical="16dp"
                 android:id="@+id/vacancy_description"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:textAlignment="center"
                 android:textColor="@color/cardview_light_background" />
 
             <Button
-                android:layout_weight="4"
+                android:layout_marginVertical="16dp"
                 style="@android:style/Widget.Holo.Light.Button"
                 android:text="@string/respond"
                 android:id="@+id/respond_button"
+                android:background="@drawable/filter_background"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </LinearLayout>

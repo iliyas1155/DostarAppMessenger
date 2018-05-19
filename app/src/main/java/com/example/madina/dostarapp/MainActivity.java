@@ -2,22 +2,18 @@ package com.example.madina.dostarapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.madina.dostarapp.Adapters.VacanciesAdapter;
-import com.example.madina.dostarapp.Items.Course;
 import com.example.madina.dostarapp.Items.ForumTopic;
-import com.example.madina.dostarapp.Items.Vacancy;
 import com.example.madina.dostarapp.Utils.UserProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,17 +21,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
+import com.hololo.tutorial.library.PermissionStep;
+import com.hololo.tutorial.library.Step;
+import com.hololo.tutorial.library.TutorialActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.madina.dostarapp.Utils.SharedPreferencesUtil.isTutorialShown;
+import static com.example.madina.dostarapp.Utils.SharedPreferencesUtil.setTutorialShown;
+
 public class MainActivity extends AppCompatActivity {
     public static final String COLLECTION_USERS = "users";
     public static final String SUPPORT_COLLECTION = "support_chat";
-    private static final String ADMINS_COLLECTION = "admins";
+    public static final String ADMINS_COLLECTION = "admins";
     private static final String TAG = "MainActivity";
     public static FirebaseAuth mAuth;
     public static UserProfile userProfile;
@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         setOnClick();
         ADMIN_EMAILS_LIST = null;
-        getAdmins();
 
         userProfile = null;
     }
@@ -75,7 +74,14 @@ public class MainActivity extends AppCompatActivity {
         setDefaultTopic();
         // Check if user is signed in (non-null) and update UI accordingly.
         currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+
+        if(isTutorialShown(this) == false){
+            Intent myIntent = new Intent(MainActivity.this, com.example.madina.dostarapp.TutorialActivity.class);
+            MainActivity.this.startActivity(myIntent);
+        }
+        setTutorialShown(this);
+
+//        updateUI(currentUser);
     }
 
     public static void setDefaultTopic(){
@@ -139,26 +145,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public static void getAdmins(){
-        db.collection(ADMINS_COLLECTION)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            ADMIN_EMAILS_LIST = new ArrayList();
-                            for (DocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                String email = (String) document.getData().get("email");
-                                ADMIN_EMAILS_LIST.add(email);
-                            }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
-                        }
-                    }
-                });
     }
 
 

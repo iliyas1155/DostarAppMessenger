@@ -35,5 +35,6 @@ dependencies {
     compile files('activation.jar')
     compile files('additionnal.jar')
     compile files('mail.jar')
+    compile 'com.github.msayan:tutorial-view:v1.0.6'
 }
 apply plugin: 'com.google.gms.google-services'
